@@ -1,24 +1,22 @@
-# README
+# 🎵 AlbumTracker
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**AlbumTracker** é um sistema em **Ruby on Rails** para gerenciar **álbuns, bandas, gêneros** e **reviews** de forma simples e intuitiva.
 
-Things you may want to cover:
+---
 
-* Ruby version
+## 🚀 Tecnologias
+- Ruby on Rails  
+- Bootstrap 5  
+- JavaScript (ES6)  
+- HTML5 & CSS3  
+- MySQL
+- Vite Rails
 
-* System dependencies
+---
 
-* Configuration
+## ⚙️ Funcionalidades
+- Cadastro de usuários  
+- Gerenciamento de bandas, álbuns e gêneros  
+- Reviews com notas de 1 a 10  
+- Interface moderna e responsiva com Bootstrap  
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
