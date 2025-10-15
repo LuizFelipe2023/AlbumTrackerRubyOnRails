@@ -2,7 +2,7 @@ class StylesController < ApplicationController
   before_action :set_style, only: %i[show edit update destroy]
 
   def index
-    @styles = Style.includes(:genre).order(:name)
+    @styles = Style.includes(:genre).order(:name).page(params[:page]).per(10)
   end
 
   def show

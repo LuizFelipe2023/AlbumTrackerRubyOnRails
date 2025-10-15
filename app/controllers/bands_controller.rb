@@ -2,7 +2,7 @@ class BandsController < ApplicationController
   before_action :set_band, only: %i[show edit update destroy]
 
   def index
-    @bands = Band.order(:name)
+    @bands = Band.order(:name).page(params[:page]).per(10)
   end
 
   def show

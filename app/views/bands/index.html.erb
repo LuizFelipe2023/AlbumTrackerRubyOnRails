@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <div class="card border-0 rounded-0" style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
         
-      
+        <!-- Card Header -->
         <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-3 px-4 border-0 rounded-0">
           <h5 class="mb-0 fw-semibold">
             <i class="bi bi-vinyl me-2"></i>Music Bands
@@ -13,7 +13,7 @@
           <% end %>
         </div>
 
-      
+        <!-- Card Body -->
         <div class="card-body bg-white p-0">
           <% if @bands.any? %>
             <div class="table-container">
@@ -43,22 +43,18 @@
                         <% end %>
                       </td>
 
-                    
                       <td class="py-3 border-0 fw-medium" style="color: #333;">
                         <%= band.name %>
                       </td>
 
-                     
                       <td class="py-3 border-0" style="color: #666;">
                         <%= band.country.presence || "—" %>
                       </td>
 
-                     
                       <td class="py-3 border-0" style="color: #666;">
                         <%= band.formed_in.presence || "—" %>
                       </td>
 
-                     
                       <td class="py-3 border-0 text-center">
                         <% if band.genre %>
                           <span class="badge bg-dark text-white border m-1 px-2 py-1">
@@ -69,7 +65,6 @@
                         <% end %>
                       </td>
 
-                      
                       <td class="py-3 border-0 text-center">
                         <% if band.styles.any? %>
                           <div class="d-flex flex-wrap justify-content-center gap-1">
@@ -84,7 +79,6 @@
                         <% end %>
                       </td>
 
-                     
                       <td class="text-center py-3 border-0">
                         <div class="d-flex justify-content-center gap-1">
                           <%= link_to band_path(band), class: "btn btn-sm border-0 rounded-0 action-btn", title: "View band" do %>
@@ -103,6 +97,17 @@
                 </tbody>
               </table>
             </div>
+
+            <!-- Paginação -->
+            <div class="d-flex justify-content-between align-items-center px-4 py-3 border-top" style="border-color: #e0e0e0 !important;">
+              <div class="text-muted small">
+                Showing <%= @bands.offset_value + 1 %> to <%= @bands.offset_value + @bands.length %> of <%= @bands.total_count %> entries
+              </div>
+              <div class="pagination-container">
+                <%= paginate @bands%>
+              </div>
+            </div>
+
           <% else %>
             <div class="text-center py-5">
               <i class="bi bi-vinyl display-4 mb-3" style="color: #ccc;"></i>

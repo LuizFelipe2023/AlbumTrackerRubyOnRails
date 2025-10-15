@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   allow_unauthenticated_access only: %i[new create]
 
   def index
-    @users = User.order(:name)
+      @users = User.order(:name).page(params[:page]).per(10)
   end
 
   def show

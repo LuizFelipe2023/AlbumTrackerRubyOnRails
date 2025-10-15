@@ -4,7 +4,7 @@ class ReviewsController < ApplicationController
   def index
     @reviews = Review.includes(:album, :user)
                      .joins(:album)
-                     .order('albums.title ASC, reviews.title ASC')
+                     .order('albums.title ASC, reviews.title ASC').page(params[:page]).per(10)
   end
 
   def show

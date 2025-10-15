@@ -2,7 +2,7 @@ class AlbumsController < ApplicationController
   before_action :set_album, only: %i[show edit update destroy]
 
   def index
-    @albums = Album.order(:release_year)
+    @albums = Album.order(:release_year).page(params[:page]).per(10)
   end
 
   def show
