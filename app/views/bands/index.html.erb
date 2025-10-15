@@ -1,0 +1,120 @@
+<div class="container-md py-4">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-12">
+      <div class="card border-0 rounded-0" style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        
+      
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-3 px-4 border-0 rounded-0">
+          <h5 class="mb-0 fw-semibold">
+            <i class="bi bi-vinyl me-2"></i>Music Bands
+          </h5>
+          <%= link_to new_band_path, class: "btn btn-outline-light btn-sm border d-flex align-items-center" do %>
+            <i class="bi bi-plus-circle me-2"></i> Add Band
+          <% end %>
+        </div>
+
+      
+        <div class="card-body bg-white p-0">
+          <% if @bands.any? %>
+            <div class="table-container">
+              <table class="table table-hover align-middle mb-0 rounded-0 border-0">
+                <thead class="bg-light text-dark border-bottom" style="border-color: #e0e0e0 !important;">
+                  <tr>
+                    <th scope="col" class="text-center py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem; letter-spacing: 0.5px; width: 80px;">Logo</th>
+                    <th scope="col" class="py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem; letter-spacing: 0.5px;">Band Name</th>
+                    <th scope="col" class="py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem; letter-spacing: 0.5px;">Country</th>
+                    <th scope="col" class="py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem; letter-spacing: 0.5px;">Formed</th>
+                    <th scope="col" class="py-3 fw-semibold border-0 text-uppercase text-center" style="font-size: 0.85rem; letter-spacing: 0.5px;">Genre</th>
+                    <th scope="col" class="py-3 fw-semibold border-0 text-uppercase text-center" style="font-size: 0.85rem; letter-spacing: 0.5px;">Styles</th>
+                    <th scope="col" class="text-center py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem; letter-spacing: 0.5px; width: 100px;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white">
+                  <% @bands.each do |band| %>
+                    <tr class="border-bottom" style="border-color: #f0f0f0 !important;">
+
+                      <td class="text-center py-3 border-0">
+                        <% if band.logo.attached? %>
+                          <%= image_tag url_for(band.logo), class: "rounded-0 border", style: "width:50px; height:50px; object-fit:cover;" %>
+                        <% else %>
+                          <div class="bg-light d-flex align-items-center justify-content-center rounded-0 border" style="width:50px; height:50px; margin: 0 auto;">
+                            <i class="bi bi-music-note-beamed text-muted"></i>
+                          </div>
+                        <% end %>
+                      </td>
+
+                    
+                      <td class="py-3 border-0 fw-medium" style="color: #333;">
+                        <%= band.name %>
+                      </td>
+
+                     
+                      <td class="py-3 border-0" style="color: #666;">
+                        <%= band.country.presence || "—" %>
+                      </td>
+
+                     
+                      <td class="py-3 border-0" style="color: #666;">
+                        <%= band.formed_in.presence || "—" %>
+                      </td>
+
+                     
+                      <td class="py-3 border-0 text-center">
+                        <% if band.genre %>
+                          <span class="badge bg-dark text-white border m-1 px-2 py-1">
+                            <%= band.genre.name %>
+                          </span>
+                        <% else %>
+                          <span class="text-muted" style="font-size: 0.85rem;">—</span>
+                        <% end %>
+                      </td>
+
+                      
+                      <td class="py-3 border-0 text-center">
+                        <% if band.styles.any? %>
+                          <div class="d-flex flex-wrap justify-content-center gap-1">
+                            <% band.styles.each do |style| %>
+                              <span class="badge bg-light text-dark border m-1 px-2 py-1">
+                                <%= style.name %>
+                              </span>
+                            <% end %>
+                          </div>
+                        <% else %>
+                          <span class="text-muted">No styles</span>
+                        <% end %>
+                      </td>
+
+                     
+                      <td class="text-center py-3 border-0">
+                        <div class="d-flex justify-content-center gap-1">
+                          <%= link_to band_path(band), class: "btn btn-sm border-0 rounded-0 action-btn", title: "View band" do %>
+                            <i class="bi bi-eye" style="color: #666;"></i>
+                          <% end %>
+                          <%= link_to edit_band_path(band), class: "btn btn-sm border-0 rounded-0 action-btn", title: "Edit band" do %>
+                            <i class="bi bi-pencil" style="color: #666;"></i>
+                          <% end %>
+                          <button type="button" class="btn btn-sm border-0 rounded-0 action-btn" data-bs-toggle="modal" data-bs-target="#deleteBandModal<%= band.id %>">
+                            <i class="bi bi-trash" style="color: #666;"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          <% else %>
+            <div class="text-center py-5">
+              <i class="bi bi-vinyl display-4 mb-3" style="color: #ccc;"></i>
+              <p class="text-muted mb-2 fs-5">No bands found</p>
+              <p class="text-muted small mb-4">Start building your music collection</p>
+              <%= link_to new_band_path, class: "btn btn-dark rounded-0 border-0 px-4" do %>
+                <i class="bi bi-plus-circle me-2"></i>Add First Band
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

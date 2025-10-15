@@ -1,0 +1,112 @@
+body {
+  background-color: #f8f9fa;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.card {
+  background: white;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table th {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.85rem;
+}
+
+.table td {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  vertical-align: middle;
+}
+
+.action-btn {
+  background: transparent;
+  padding: 6px 8px;
+  transition: all 0.2s ease;
+  border: 1px solid transparent !important;
+}
+
+.action-btn:hover {
+  background-color: #f8f9fa;
+  border: 1px solid #e0e0e0 !important;
+}
+
+.btn-dark {
+  background-color: #333;
+  border: none;
+}
+
+.btn-dark:hover {
+  background-color: #000;
+}
+
+.btn-outline-light {
+  border-color: #fff;
+  color: #fff;
+}
+
+.btn-outline-light:hover {
+  background-color: #fff;
+  color: #333;
+}
+
+.alert {
+  border-radius: 0;
+  border: none;
+}
+
+.modal-content {
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .container-md {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .card-header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  
+  .table-responsive {
+    font-size: 0.9rem;
+  }
+  
+  .action-btn {
+    padding: 4px 6px;
+  }
+}
+
+tr:hover {
+  background-color: #fafafa !important;
+}
+
+.table-container {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.table-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

@@ -1,0 +1,51 @@
+<div class="container-md py-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm border-0 rounded-3">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center rounded-top-3">
+          <h4 class="mb-0 fw-semibold">
+            <i class="bi bi-box-arrow-in-right me-2"></i> Sign In
+          </h4>
+        </div>
+
+        <div class="card-body bg-light">
+
+          <% if flash[:alert] %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <%= flash[:alert] %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <% end %>
+
+          <% if flash[:notice] %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <%= flash[:notice] %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <% end %>
+
+          <%= form_with url: sessions_path, local: true do |form| %>
+            <div class="mb-3">
+              <%= form.label :email_address, "Email Address", class: "form-label fw-semibold text-muted" %>
+              <%= form.email_field :email_address, class: "form-control", required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email", value: params[:email_address] %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :password, "Password", class: "form-label fw-semibold text-muted" %>
+              <%= form.password_field :password, class: "form-control", required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72 %>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <%= link_to "Forgot password?", new_password_path, class: "text-decoration-none small" %>
+            </div>
+
+            <div class="d-flex justify-content-end">
+              <%= form.submit "Sign In", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

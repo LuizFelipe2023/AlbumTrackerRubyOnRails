@@ -1,0 +1,109 @@
+<div class="card border-0 rounded-0" style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+  
+  <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-3 px-4 border-0 rounded-0">
+    <h5 class="mb-0 fw-semibold">
+      <i class="bi bi-chat-square-text me-2"></i>
+      <%= review.persisted? ? "Edit Review" : "New Review" %>
+    </h5>
+    <%= link_to reviews_path, class: "btn btn-outline-light btn-sm border d-flex align-items-center" do %>
+      <i class="bi bi-arrow-left me-2"></i> Back to Reviews
+    <% end %>
+  </div>
+
+  <div class="card-body bg-white p-4">
+    <%= form_with(model: review, local: true, class: "review-form") do |form| %>
+
+      <% if review.errors.any? %>
+        <div class="alert alert-danger alert-dismissible fade show rounded-0 border-0 mb-4" 
+             style="background-color: #fdf0f0; color: #8b2a2a; border-left: 4px solid #dc3545;" role="alert">
+          <div class="d-flex align-items-center mb-2">
+            <i class="bi bi-exclamation-triangle me-2"></i>
+            <h6 class="mb-0 fw-semibold">
+              <%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:
+            </h6>
+          </div>
+          <ul class="mb-0 ps-3" style="font-size: 0.9rem;">
+            <% review.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
+
+      <div class="mb-4">
+        <%= form.label :title, "Review Title", class: "form-label fw-medium text-dark mb-2" %>
+        <%= form.text_field :title, class: "form-control rounded-0 border", placeholder: "Enter review title" %>
+      </div>
+
+      <div class="mb-4">
+        <%= form.label :content, "Review Content", class: "form-label fw-medium text-dark mb-2" %>
+        <%= form.text_area :content, class: "form-control rounded-0 border", rows: 5, 
+            placeholder: "Write your detailed thoughts about the album..." %>
+        <div class="form-text text-muted small mt-1">
+          Share your honest opinion about the music, production, and overall experience
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <%= form.label :score, "Rating Score", class: "form-label fw-medium text-dark mb-2" %>
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <%= form.number_field :score, class: "form-control rounded-0 border", 
+                step: 0.1, min: 0, max: 10, placeholder: "0.0 - 10.0" %>
+          </div>
+          <div class="col-md-6">
+            <div class="form-text text-muted small">
+              <i class="bi bi-info-circle me-1"></i>
+              Rate from 0.0 to 10.0 (decimals allowed)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-md-6 mb-3">
+          <%= form.label :album_id, "Album", class: "form-label fw-medium text-dark mb-2" %>
+          <% if review.album_id.present? %>
+            <%= form.hidden_field :album_id %>
+            <div class="form-control-plaintext border-bottom pb-2" style="color: #333; min-height: auto; padding-left: 0;">
+              <i class="bi bi-disc me-2 text-muted"></i><%= review.album.title %>
+            </div>
+            <div class="form-text text-muted small mt-1">
+              Album is pre-selected and cannot be changed
+            </div>
+          <% else %>
+            <%= form.collection_select :album_id, Album.order(:title), :id, :title, 
+                { prompt: "Select an album" }, { class: "form-select rounded-0 border" } %>
+          <% end %>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <%= form.label :user_id, "Reviewer", class: "form-label fw-medium text-dark mb-2" %>
+          <%= form.hidden_field :user_id, value: Current.user&.id %>
+          <div class="form-control-plaintext border-bottom pb-2" style="color: #333; min-height: auto; padding-left: 0;">
+            <i class="bi bi-person me-2 text-muted"></i><%= Current.user&.email_address || 'CURRENT USER' %>
+          </div>
+          <div class="form-text text-muted small mt-1">
+            You are the author of this review
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center pt-3 border-top" style="border-color: #e0e0e0 !important;">
+        <div class="text-muted small">
+          <i class="bi bi-info-circle me-1"></i>
+          <%= review.persisted? ? "Update your review" : "Create new album review" %>
+        </div>
+        <div class="d-flex gap-2">
+          <%= link_to reviews_path, class: "btn btn-outline-secondary rounded-0 border px-4 d-flex align-items-center" do %>
+            <i class="bi bi-x-circle me-2"></i>Cancel
+          <% end %>
+          <%= form.submit (review.persisted? ? "Update Review" : "Create Review"), 
+              class: "btn btn-dark rounded-0 border-0 px-4 d-flex align-items-center" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+

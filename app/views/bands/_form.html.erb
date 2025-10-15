@@ -1,0 +1,99 @@
+<div class="container-md py-4">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-10 col-lg-8">
+      <div class="card border-0 rounded-0" style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        
+      
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-3 px-4 border-0 rounded-0">
+          <h5 class="mb-0 fw-semibold">
+            <i class="bi bi-vinyl me-2"></i>
+            <%= band.persisted? ? "Edit Band" : "New Band" %>
+          </h5>
+          <%= link_to bands_path, class: "btn btn-outline-light btn-sm border d-flex align-items-center" do %>
+            <i class="bi bi-arrow-left me-2"></i> Back to Bands
+          <% end %>
+        </div>
+
+   
+        <div class="card-body bg-white p-4">
+          <%= form_with(model: band, local: true, class: "band-form") do |form| %>
+
+          
+            <div class="row mb-4">
+              <div class="col-md-6 mb-3">
+                <%= form.label :name, "Band Name", class: "form-label fw-medium text-dark mb-2" %>
+                <%= form.text_field :name, class: "form-control rounded-0 border", placeholder: "Enter band name" %>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <%= form.label :country, "Country", class: "form-label fw-medium text-dark mb-2" %>
+                <%= form.text_field :country, class: "form-control rounded-0 border", placeholder: "e.g. United States" %>
+              </div>
+            </div>
+
+           
+            <div class="row mb-4">
+              <div class="col-md-6 mb-3">
+                <%= form.label :formed_in, "Formed In", class: "form-label fw-medium text-dark mb-2" %>
+                <%= form.number_field :formed_in, class: "form-control rounded-0 border", 
+                    min: 1900, max: Time.current.year, 
+                    placeholder: "e.g. 1990" %>
+              </div>
+              
+              <div class="col-md-6 mb-3">
+                <%= form.label :genre_id, "Genre", class: "form-label fw-medium text-dark mb-2" %>
+                <%= form.collection_select :genre_id, Genre.all, :id, :name, 
+                    { prompt: "Select genre" }, 
+                    { class: "form-select rounded-0 border" } %>
+              </div>
+            </div>
+
+         
+            <div class="mb-4">
+              <%= form.label :style_ids, "Music Styles", class: "form-label fw-medium text-dark mb-2" %>
+              <%= form.collection_select :style_ids, Style.all, :id, :name, 
+                  { prompt: "Select styles", selected: @band.style_ids }, 
+                  { multiple: true, class: "form-select rounded-0 border", style: "height: 120px;" } %>
+              <div class="form-text text-muted small mt-1">
+                Hold Ctrl/Cmd to select multiple styles
+              </div>
+            </div>
+
+           
+            <div class="mb-4">
+              <%= form.label :logo, "Band Logo", class: "form-label fw-medium text-dark mb-2" %>
+              <%= form.file_field :logo, class: "form-control rounded-0 border" %>
+              
+          
+              <% if band.logo.attached? %>
+                <div class="mt-3">
+                  <p class="text-muted small mb-2">Current Logo:</p>
+                  <%= image_tag band.logo.variant(resize_to_limit: [120, 120]), class: "rounded-0 border", style: "max-width: 120px;" %>
+                </div>
+              <% else %>
+                <div class="form-text text-muted small mt-1">
+                  Optional: Upload a band logo (JPG, PNG, GIF)
+                </div>
+              <% end %>
+            </div>
+
+           
+            <div class="d-flex justify-content-between align-items-center pt-3 border-top" style="border-color: #e0e0e0 !important;">
+              <div class="text-muted small">
+                <i class="bi bi-info-circle me-1"></i>
+                <%= band.persisted? ? "Update band information" : "Create new band entry" %>
+              </div>
+              <div class="d-flex gap-2">
+                <%= link_to bands_path, class: "btn btn-outline-secondary rounded-0 border px-4 d-flex align-items-center" do %>
+                  <i class="bi bi-x-circle me-2"></i>Cancel
+                <% end %>
+                <%= form.submit (band.persisted? ? "Update Band" : "Create Band"), class: "btn btn-dark rounded-0 border-0 px-4" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

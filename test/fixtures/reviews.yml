@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  content: MyText
+  user: one
+  album: one
+  score: 1.5
+
+two:
+  title: MyString
+  content: MyText
+  user: two
+  album: two
+  score: 1.5

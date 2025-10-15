@@ -1,0 +1,102 @@
+<footer class="bg-dark border-top border-secondary mt-auto">
+  <div class="container-md py-4">
+    <div class="row">
+      <!-- Logo and Description -->
+      <div class="col-lg-4 mb-4 mb-lg-0">
+        <div class="d-flex align-items-center mb-3">
+          <i class="bi bi-vinyl-fill text-primary me-2" style="font-size: 1.5rem;"></i>
+          <span class="text-white fw-bold fs-5">ALBUMTRACKER</span>
+        </div>
+        <p class="text-light mb-3" style="font-size: 0.9rem; line-height: 1.4;">
+          Your personal music collection manager. Track albums, rate reviews, and discover new music.
+        </p>
+        <div class="text-light small">
+          <i class="bi bi-c-circle me-1"></i>
+          <span>2025 AlbumTracker. All rights reserved.</span>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3 col-lg-2 mb-4 mb-md-0">
+        <h6 class="text-white fw-bold mb-3 text-uppercase small">Explore</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2">
+            <%= link_to "Bands", bands_path, class: "text-light text-decoration-none hover-primary", style: "font-size: 0.9rem;" %>
+          </li>
+          <li class="mb-2">
+            <%= link_to "Albums", albums_path, class: "text-light text-decoration-none hover-primary", style: "font-size: 0.9rem;" %>
+          </li>
+          <li class="mb-2">
+            <%= link_to "Reviews", reviews_path, class: "text-light text-decoration-none hover-primary", style: "font-size: 0.9rem;" %>
+          </li>
+          <li class="mb-2">
+            <%= link_to "Favorites", favorites_path, class: "text-light text-decoration-none hover-primary", style: "font-size: 0.9rem;" %>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-md-3 col-lg-2 mb-4 mb-md-0">
+        <h6 class="text-white fw-bold mb-3 text-uppercase small">Support</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2">
+            <a href="#" class="text-light text-decoration-none hover-primary" style="font-size: 0.9rem;">Help Center</a>
+          </li>
+          <li class="mb-2">
+            <a href="#" class="text-light text-decoration-none hover-primary" style="font-size: 0.9rem;">Contact Us</a>
+          </li>
+          <li class="mb-2">
+            <a href="#" class="text-light text-decoration-none hover-primary" style="font-size: 0.9rem;">Privacy Policy</a>
+          </li>
+          <li class="mb-2">
+            <a href="#" class="text-light text-decoration-none hover-primary" style="font-size: 0.9rem;">Terms of Service</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <h6 class="text-white fw-bold mb-3 text-uppercase small">Connect With Us</h6>
+        <p class="text-light mb-3" style="font-size: 0.9rem;">
+          Join our community of music enthusiasts and collectors.
+        </p>
+        
+        <div class="d-flex gap-3 mb-4">
+          <a href="#" class="text-white text-decoration-none social-icon" aria-label="Instagram">
+            <i class="bi bi-instagram" style="font-size: 1.25rem;"></i>
+          </a>
+          <a href="#" class="text-white text-decoration-none social-icon" aria-label="Facebook">
+            <i class="bi bi-facebook" style="font-size: 1.25rem;"></i>
+          </a>
+          <a href="#" class="text-white text-decoration-none social-icon" aria-label="Twitter">
+            <i class="bi bi-twitter" style="font-size: 1.25rem;"></i>
+          </a>
+          <a href="#" class="text-white text-decoration-none social-icon" aria-label="GitHub">
+            <i class="bi bi-github" style="font-size: 1.25rem;"></i>
+          </a>
+        </div>
+              
+        <div class="newsletter-form">
+          <label for="newsletterEmail" class="form-label text-light small mb-2">Stay updated with new features</label>
+          <div class="input-group input-group-sm" style="max-width: 300px;">
+            <input type="email" class="form-control bg-dark border-secondary text-light" id="newsletterEmail" placeholder="Your email" style="font-size: 0.9rem;">
+            <button class="btn btn-outline-light border-secondary text-white" type="button" style="font-size: 0.9rem; white-space: nowrap;">
+              Subscribe
+            </button>
+          </div>
+        </div>
+ 
+      </div>
+    </div>
+
+    <div class="row mt-4 pt-3 border-top border-secondary">
+      <div class="col-md-6 text-center text-md-start">
+        <span class="text-light small">Made with <i class="bi bi-heart-fill text-danger mx-1" style="font-size: 0.7rem;"></i> for music lovers</span>
+      </div>
+      <div class="col-md-6 text-center text-md-end">
+        <span class="text-light small">
+          <i class="bi bi-disc-fill text-primary me-1"></i>
+          Tracking <strong><%= Album.count %></strong> albums and counting
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
+

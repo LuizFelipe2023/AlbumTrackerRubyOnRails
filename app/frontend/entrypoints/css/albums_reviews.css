@@ -1,0 +1,147 @@
+body {
+  background-color: #f8f9fa;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.card {
+  background: white;
+}
+
+.btn-dark {
+  background-color: #333;
+  border: none;
+  font-weight: 500;
+  padding: 8px 20px;
+}
+
+.btn-dark:hover {
+  background-color: #000;
+}
+
+.btn-outline-light {
+  border-color: #fff;
+  color: #fff;
+  font-size: 0.85rem;
+  padding: 5px 10px;
+}
+
+.btn-outline-light:hover {
+  background-color: #fff;
+  color: #333;
+}
+
+.review-item {
+  background: white;
+  transition: background-color 0.2s ease;
+}
+
+.review-item:hover {
+  background-color: #fafafa;
+}
+
+.review-item:last-child {
+  border-bottom: none !important;
+}
+
+.btn-sm.border-0 {
+  padding: 4px 6px;
+  transition: all 0.2s ease;
+}
+
+.btn-sm.border-0:hover {
+  background-color: #f0f0f0 !important;
+}
+
+.bi-star-fill {
+  color: #ffc107;
+}
+
+.card-footer {
+  background-color: #fafafa !important;
+  color: #666 !important;
+}
+
+@media (max-width: 768px) {
+  .container-md {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .card-header {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+  
+  .card-header .d-flex {
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+  
+  .card-header .d-flex .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .review-item {
+    padding: 1rem !important;
+  }
+  
+  .card-footer .d-flex {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+  
+  .review-item .d-flex.justify-content-between {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start !important;
+  }
+  
+  .review-item .d-flex.justify-content-between .d-flex {
+    align-self: flex-end;
+  }
+}
+
+.review-item div[style*="color: #666"] {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.text-muted.small {
+  font-size: 0.8rem;
+}
+
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+
+.text-center.py-5 {
+  padding: 3rem 1rem !important;
+}
+
+.btn:focus {
+  box-shadow: 0 0 0 2px rgba(51, 51, 51, 0.25);
+}
+
+.review-item .d-flex.justify-content-between:last-child {
+  align-items: center;
+}
+
+.d-flex.gap-1 {
+  gap: 4px !important;
+}
+
+.d-flex.gap-2 {
+  gap: 8px !important;
+}
+
+.simple_format p {
+  margin-bottom: 0.5rem;
+}
+
+.simple_format p:last-child {
+  margin-bottom: 0;
+}

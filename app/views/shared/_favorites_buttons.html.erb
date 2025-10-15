@@ -1,0 +1,27 @@
+<% if authenticated? %>
+  <div class="d-flex gap-2">
+    <% if defined?(band) && band.present? %>
+      <% if Current.session.user.favorited_bands.include?(band) %>
+        <%= button_to unfavorite_band_favorites_path(band_id: band.id), method: :delete, class: "btn btn-md btn-danger btn-sm" do %>
+          ♥ Remover dos Favoritos
+        <% end %>
+      <% else %>
+        <%= button_to favorite_band_favorites_path(band_id: band.id), method: :post, class: "btn btn-md btn-outline-danger btn-sm" do %>
+          ♡ Adicionar aos Favoritos
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% if defined?(album) && album.present? %>
+      <% if Current.session.user.favorited_albums.include?(album) %>
+        <%= button_to unfavorite_album_favorites_path(album_id: album.id), method: :delete, class: "btn btn-md btn-danger btn-sm" do %>
+          ♥ Remover dos Favoritos
+        <% end %>
+      <% else %>
+        <%= button_to favorite_album_favorites_path(album_id: album.id), method: :post, class: "btn btn-md btn-outline-danger btn-sm" do %>
+          ♡ Adicionar aos Favoritos
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,319 @@
+.favorites-page {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  min-height: 100vh;
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.favorites-page h1 {
+  background: linear-gradient(135deg, #333 0%, #666 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.favorites-page .text-muted {
+  color: #6c757d !important;
+  font-weight: 400;
+}
+
+.nav-tabs {
+  border-bottom: 2px solid #dee2e6;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.nav-tabs .nav-link {
+  border: none;
+  border-radius: 8px;
+  padding: 12px 28px;
+  margin: 0 4px;
+  color: #6c757d;
+  font-weight: 600;
+  background: transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-tabs .nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(13, 110, 253, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.nav-tabs .nav-link:hover::before {
+  left: 100%;
+}
+
+.nav-tabs .nav-link:hover {
+  color: #495057;
+  background: rgba(13, 110, 253, 0.05);
+  transform: translateY(-1px);
+}
+
+.nav-tabs .nav-link.active {
+  color: #fff;
+  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+  border: none;
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+  transform: translateY(-1px);
+}
+
+.nav-tabs .nav-link.active .badge {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: #fff;
+}
+
+.badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 10px;
+}
+
+.favorite-card {
+  background: #fff;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.favorite-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+  border-color: rgba(13, 110, 253, 0.2);
+}
+
+.card-img-top {
+  border-radius: 12px 12px 0 0;
+  transition: transform 0.3s ease;
+  background: linear-gradient(135deg, #f1f3f4 0%, #e8eaed 100%);
+}
+
+.favorite-card:hover .card-img-top {
+  transform: scale(1.03);
+}
+
+.favorite-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  font-size: 0.9rem;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.favorite-card:hover .favorite-btn {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.favorite-btn:hover {
+  background: #dc3545 !important;
+  border-color: #dc3545 !important;
+  color: white !important;
+  transform: scale(1.15);
+}
+
+.card-body {
+  padding: 1.5rem !important;
+  background: #fff;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  line-height: 1.4;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.card-title a {
+  color: #212529;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.card-title a:hover {
+  color: #0d6efd;
+}
+
+.card-text {
+  font-size: 0.875rem;
+  color: #6c757d !important;
+  line-height: 1.5;
+}
+
+.border-top {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  padding-top: 1rem;
+}
+
+.badge.bg-light {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+  color: #495057 !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  font-weight: 500;
+  padding: 6px 10px;
+}
+
+.empty-state {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.empty-state .display-1 {
+  font-size: 4rem;
+  color: #dee2e6 !important;
+  margin-bottom: 1.5rem;
+}
+
+.empty-state h3 {
+  color: #495057 !important;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.empty-state p {
+  color: #6c757d !important;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.btn-dark {
+  background: linear-gradient(135deg, #495057 0%, #343a40 100%);
+  border: none;
+  padding: 10px 28px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(52, 58, 64, 0.2);
+}
+
+.btn-dark:hover {
+  background: linear-gradient(135deg, #343a40 0%, #212529 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(52, 58, 64, 0.3);
+}
+
+.row.g-4 {
+  margin: 0 -12px;
+}
+
+.col-xl-3, .col-lg-4, .col-md-6 {
+  padding: 12px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.favorite-card {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+@media (max-width: 768px) {
+  .favorites-page {
+    padding: 1rem 0 !important;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .nav-tabs {
+    padding: 6px;
+    border-radius: 8px;
+  }
+  
+  .nav-tabs .nav-link {
+    padding: 10px 16px;
+    font-size: 0.875rem;
+    margin: 0 2px;
+    border-radius: 6px;
+  }
+  
+  h1 {
+    font-size: 2rem !important;
+  }
+  
+  .card-body {
+    padding: 1.25rem !important;
+  }
+  
+  .empty-state .display-1 {
+    font-size: 3rem;
+  }
+  
+  .favorite-btn {
+    opacity: 1; 
+    transform: scale(0.9);
+  }
+}
+
+@media (max-width: 576px) {
+  .nav-tabs .nav-link {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+  
+  .badge {
+    font-size: 0.6rem;
+    padding: 3px 6px;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.nav-link:focus,
+.btn:focus,
+.favorite-btn:focus {
+  outline: 2px solid #0d6efd;
+  outline-offset: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

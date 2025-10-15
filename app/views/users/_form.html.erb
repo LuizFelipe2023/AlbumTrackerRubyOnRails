@@ -1,0 +1,118 @@
+<div class="container-md py-4">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card border-0 rounded-0" style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        
+        <!-- Card Header -->
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-3 px-4 border-0 rounded-0">
+          <h5 class="mb-0 fw-semibold">
+            <i class="bi bi-person-gear me-2"></i>
+            <%= user.persisted? ? "Edit User" : "Create New User" %>
+          </h5>
+          <%= link_to (Current.user&.admin? ? users_path : user_path(@user)), class: "btn btn-outline-light btn-sm border d-flex align-items-center" do %>
+            <i class="bi bi-arrow-left me-2"></i> Back
+          <% end %>
+        </div>
+
+        <!-- Card Body -->
+        <div class="card-body bg-white p-4">
+          <!-- Flash Messages -->
+          <% if flash[:notice] %>
+            <div class="alert alert-success alert-dismissible fade show rounded-0 border-0 mb-4" style="background-color: #f0f9f0; color: #2d5c2d; border-left: 4px solid #28a745;" role="alert">
+              <i class="bi bi-check-circle me-2"></i><%= flash[:notice] %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <% end %>
+
+          <% if flash[:alert] %>
+            <div class="alert alert-danger alert-dismissible fade show rounded-0 border-0 mb-4" style="background-color: #fdf0f0; color: #8b2a2a; border-left: 4px solid #dc3545;" role="alert">
+              <i class="bi bi-exclamation-triangle me-2"></i><%= flash[:alert] %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <% end %>
+
+          <!-- User Form -->
+          <%= form_with(model: user, local: true, class: "user-form") do |form| %>
+            <!-- Name and Username Row -->
+            <div class="row mb-3">
+              <div class="col-md-6 mb-3">
+                <%= form.label :name, "Full Name", class: "form-label fw-medium text-dark mb-2" %>
+                <%= form.text_field :name, class: "form-control rounded-0 border", placeholder: "Enter full name" %>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <%= form.label :username, "Username", class: "form-label fw-medium text-dark mb-2" %>
+                <%= form.text_field :username, class: "form-control rounded-0 border", placeholder: "Enter username" %>
+              </div>
+            </div>
+
+            <!-- Email Field -->
+            <div class="mb-3">
+              <%= form.label :email_address, "Email Address", class: "form-label fw-medium text-dark mb-2" %>
+              <%= form.email_field :email_address, class: "form-control rounded-0 border", placeholder: "Enter email address" %>
+            </div>
+
+            <!-- Role Field (Admin Only) -->
+            <% if user.persisted? && Current.user&.admin? %>
+              <div class="mb-3">
+                <%= form.label :role, "User Role", class: "form-label fw-medium text-dark mb-2" %>
+                <%= form.select :role, User.roles.keys.map { |role| [role.titleize, role] }, {}, class: "form-select rounded-0 border" %>
+              </div>
+            <% end %>
+
+            <!-- Password Fields -->
+            <div class="row mb-3">
+              <div class="col-md-6 mb-3">
+                <%= form.label :password, "Password", class: "form-label fw-medium text-dark mb-2" %>
+                <%= form.password_field :password, class: "form-control rounded-0 border", 
+                    placeholder: user.persisted? ? "Leave blank to keep current" : "Enter password", 
+                    autocomplete: "new-password" %>
+                <% if user.persisted? %>
+                  <div class="form-text text-muted small mt-1">Leave blank to keep current password</div>
+                <% end %>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <%= form.label :password_confirmation, "Confirm Password", class: "form-label fw-medium text-dark mb-2" %>
+                <%= form.password_field :password_confirmation, class: "form-control rounded-0 border", 
+                    placeholder: user.persisted? ? "Leave blank to keep current" : "Confirm password", 
+                    autocomplete: "new-password" %>
+              </div>
+            </div>
+
+            <!-- Avatar Upload -->
+            <div class="mb-4">
+              <%= form.label :avatar, "Profile Avatar", class: "form-label fw-medium text-dark mb-2" %>
+              <%= form.file_field :avatar, class: "form-control rounded-0 border" %>
+              
+              <!-- Current Avatar Preview -->
+              <% if user.avatar.attached? %>
+                <div class="mt-3 text-center">
+                  <p class="text-muted small mb-2">Current Avatar:</p>
+                  <%= image_tag user.avatar.variant(resize_to_limit: [120, 120]), class: "rounded-0 border", style: "max-width: 120px;" %>
+                </div>
+              <% else %>
+                <div class="form-text text-muted small mt-1">
+                  Optional: Upload a profile picture (JPG, PNG, GIF)
+                </div>
+              <% end %>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="d-flex justify-content-between align-items-center pt-3 border-top" style="border-color: #e0e0e0 !important;">
+              <div class="text-muted small">
+                <i class="bi bi-info-circle me-1"></i>
+                <%= user.persisted? ? "Update user information" : "Create new user account" %>
+              </div>
+              <div class="d-flex gap-2">
+                <%= link_to "Cancel", (Current.user&.admin? ? users_path : user_path(@user)), class: "btn btn-outline-secondary rounded-0 border px-4" %>
+                <%= form.submit (user.persisted? ? "Update User" : "Create User"), class: "btn btn-dark rounded-0 border-0 px-4" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,17 @@
+<div class="container-md py-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm border-0 rounded-3">
+        <div class="card-header bg-dark text-white rounded-top-3 d-flex justify-content-between align-items-center">
+          <h4 class="mb-0 fw-semibold"><i class="bi bi-plus-circle me-2"></i> New Style</h4>
+          <%= link_to styles_path, class: "btn btn-sm btn-outline-light" do %>
+            <i class="bi bi-arrow-left me-1"></i> Back
+          <% end %>
+        </div>
+        <div class="card-body bg-light">
+          <%= render "form", style: @style %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

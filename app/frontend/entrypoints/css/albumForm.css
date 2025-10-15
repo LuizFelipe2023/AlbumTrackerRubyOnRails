@@ -1,0 +1,188 @@
+.album-form .form-control,
+.album-form .form-select {
+  border-color: #e0e0e0 !important;
+  border-radius: 0;
+  padding: 10px 12px;
+  background-color: white;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.album-form .form-control:focus,
+.album-form .form-select:focus {
+  border-color: #333 !important;
+  box-shadow: 0 0 0 2px rgba(51, 51, 51, 0.1);
+  background-color: white;
+}
+
+.album-form .form-label {
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+}
+
+.btn-dark {
+  background-color: #333;
+  border: none;
+  font-weight: 500;
+  padding: 10px 24px;
+}
+
+.btn-dark:hover {
+  background-color: #000;
+}
+
+.btn-outline-light {
+  border-color: #fff;
+  color: #fff;
+  font-size: 0.9rem;
+  padding: 6px 12px;
+}
+
+.btn-outline-light:hover {
+  background-color: #fff;
+  color: #333;
+}
+
+.btn-outline-secondary {
+  border-color: #6c757d;
+  color: #6c757d;
+  padding: 10px 24px;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: white;
+}
+
+.album-form .form-select[multiple] {
+  background-image: none;
+  padding: 8px 12px;
+}
+
+.album-form .form-select[multiple] option {
+  padding: 8px 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.album-form .form-select[multiple] option:checked {
+  background-color: #333;
+  color: white;
+}
+
+.album-form textarea.form-control {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.album-form .form-control[type="file"] {
+  padding: 8px 12px;
+}
+
+img.rounded-0 {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.form-text {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.alert {
+  border-radius: 0;
+  border: none;
+  padding: 12px 16px;
+}
+
+.alert ul {
+  margin-bottom: 0;
+}
+
+.alert li {
+  margin-bottom: 2px;
+}
+
+.card-footer {
+  background-color: #fafafa !important;
+  color: #666 !important;
+}
+
+@media (max-width: 768px) {
+  .card-header {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+  
+  .card-body {
+    padding: 1.5rem !important;
+  }
+  
+  .d-flex.justify-content-between {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .d-flex.gap-2 {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .album-form .form-select[multiple] {
+    height: 100px !important;
+  }
+  
+  .row .col-md-4 {
+    margin-bottom: 1rem;
+  }
+}
+
+.album-form .form-control.is-invalid,
+.album-form .form-select.is-invalid {
+  border-color: #dc3545 !important;
+}
+
+.album-form .form-control.is-valid,
+.album-form .form-select.is-valid {
+  border-color: #198754 !important;
+}
+
+.form-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px 12px;
+}
+
+.album-form .form-control:hover,
+.album-form .form-select:hover {
+  border-color: #ccc;
+}
+
+.album-form input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.album-form input[type="number"]::-webkit-outer-spin-button,
+.album-form input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.alert ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.alert li {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.alert li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #8b2a2a;
+}

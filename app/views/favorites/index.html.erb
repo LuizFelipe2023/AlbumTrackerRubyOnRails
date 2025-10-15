@@ -1,0 +1,138 @@
+<div class="container-fluid py-4 favorites-page">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12">
+        <h1 class="fw-bold text-center mb-2" style="font-size: 2.5rem; color: #333;">My Collection</h1>
+        <p class="text-center text-muted">Your favorite bands and albums</p>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col-12">
+        <ul class="nav nav-tabs justify-content-center border-0" id="favoritesTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="bands-tab" data-bs-toggle="tab" data-bs-target="#bands" type="button" role="tab" aria-controls="bands" aria-selected="true">
+              <i class="bi bi-mic me-2"></i>Bands
+              <% if @favorite_bands.any? %>
+                <span class="badge bg-dark ms-2"><%= @favorite_bands.count %></span>
+              <% end %>
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="albums-tab" data-bs-toggle="tab" data-bs-target="#albums" type="button" role="tab" aria-controls="albums" aria-selected="false">
+              <i class="bi bi-collection-play me-2"></i>Albums
+              <% if @favorite_albums.any? %>
+                <span class="badge bg-dark ms-2"><%= @favorite_albums.count %></span>
+              <% end %>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-content" id="favoritesTabContent">
+      <div class="tab-pane fade show active" id="bands" role="tabpanel" aria-labelledby="bands-tab">
+        <% if @favorite_bands.any? %>
+          <div class="row g-4">
+            <% @favorite_bands.each do |band| %>
+              <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="card h-100 border-0 favorite-card">
+                  <div class="position-relative">
+                    <% if band.logo.attached? %>
+                      <%= image_tag url_for(band.logo), class: "card-img-top", style: "height:200px; object-fit:cover;" %>
+                    <% else %>
+                      <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height:200px; border-bottom: 1px solid #e0e0e0;">
+                        <i class="bi bi-music-note-beamed fs-1 text-muted"></i>
+                      </div>
+                    <% end %>
+                    <div class="card-img-overlay d-flex align-items-start justify-content-end p-2">
+                      <%= button_to unfavorite_band_favorites_path(band_id: band.id), method: :delete, class: "btn btn-sm btn-outline-dark rounded-circle favorite-btn", title: "Remove from favorites" do %>
+                        <i class="bi bi-x"></i>
+                      <% end %>
+                    </div>
+                  </div>
+                  <div class="card-body d-flex flex-column p-3">
+                    <h5 class="card-title mb-1 fw-bold">
+                      <%= link_to band.name, band, class: "text-decoration-none text-dark" %>
+                    </h5>
+                    <p class="card-text text-muted small mb-2"><%= band.genre.name if band.genre %></p>
+                    <div class="mt-auto pt-2 border-top">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge bg-light text-dark border">
+                          <i class="bi bi-heart-fill text-danger me-1"></i>In Collection
+                        </span>
+                        <small class="text-muted">View</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="text-center py-5">
+            <div class="empty-state">
+              <i class="bi bi-music-note-beamed display-1 text-muted mb-3"></i>
+              <h3 class="mb-2" style="color: #333;">No bands in collection</h3>
+              <p class="text-muted">Start building your music collection</p>
+              <%= link_to "Discover Bands", bands_path, class: "btn btn-dark mt-2" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="tab-pane fade" id="albums" role="tabpanel" aria-labelledby="albums-tab">
+        <% if @favorite_albums.any? %>
+          <div class="row g-4">
+            <% @favorite_albums.each do |album| %>
+              <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="card h-100 border-0 favorite-card">
+                  <div class="position-relative">
+                    <% if album.cover.attached? %>
+                      <%= image_tag url_for(album.cover), class: "card-img-top", style: "height:200px; object-fit:cover;" %>
+                    <% else %>
+                      <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height:200px; border-bottom: 1px solid #e0e0e0;">
+                        <i class="bi bi-collection-play fs-1 text-muted"></i>
+                      </div>
+                    <% end %>
+                    <div class="card-img-overlay d-flex align-items-start justify-content-end p-2">
+                      <%= button_to unfavorite_album_favorites_path(album_id: album.id), method: :delete, class: "btn btn-sm btn-outline-dark rounded-circle favorite-btn", title: "Remove from favorites" do %>
+                        <i class="bi bi-x"></i>
+                      <% end %>
+                    </div>
+                  </div>
+                  <div class="card-body d-flex flex-column p-3">
+                    <h5 class="card-title mb-1 fw-bold">
+                      <%= link_to album.title, album, class: "text-decoration-none text-dark" %>
+                    </h5>
+                    <p class="card-text text-muted small mb-1">Released: <%= album.release_year %></p>
+                    <p class="card-text text-muted small mb-2">
+                      By: <%= album.bands.map(&:name).join(", ") %>
+                    </p>
+                    <div class="mt-auto pt-2 border-top">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge bg-light text-dark border">
+                          <i class="bi bi-heart-fill text-danger me-1"></i>In Collection
+                        </span>
+                        <small class="text-muted">View</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="text-center py-5">
+            <div class="empty-state">
+              <i class="bi bi-collection-play display-1 text-muted mb-3"></i>
+              <h3 class="mb-2" style="color: #333;">No albums in collection</h3>
+              <p class="text-muted">Start building your music collection</p>
+              <%= link_to "Explore Albums", albums_path, class: "btn btn-dark mt-2" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

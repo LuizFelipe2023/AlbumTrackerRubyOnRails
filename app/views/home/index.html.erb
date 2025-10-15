@@ -1,0 +1,80 @@
+<div class="container py-5">
+   <div class="hero-section text-center mb-5">
+      <div class="hero-content">
+         <h1 class="display-4 fw-bold mb-3">
+            <i class="bi bi-vinyl-fill me-2 hero-icon"></i>AlbumTracker
+         </h1>
+         <p class="lead text-muted mb-4">
+            Organize your album collection, explore bands and music styles, and keep your favorites at hand.
+         </p>
+         <div class="hero-buttons">
+            <%= link_to albums_path, class: "btn btn-primary btn-lg me-3 px-4 py-2 hero-btn" do %>
+            <i class="bi bi-collection-play me-2"></i>Explore Albums
+            <% end %>
+            <%= link_to bands_path, class: "btn btn-outline-dark btn-lg px-4 py-2 hero-btn" do %>
+            <i class="bi bi-music-note-list me-2"></i>Discover Bands
+            <% end %>
+         </div>
+      </div>
+   </div>
+   <div class="row g-4 mb-5">
+      <div class="col-md-3">
+         <div class="stat-card text-center p-4 rounded-2">
+            <h3 class="fw-bold text-dark mb-2"><%= @total_users %></h3>
+            <p class="text-muted mb-0">Registered Users</p>
+         </div>
+      </div>
+      <div class="col-md-3">
+         <div class="stat-card text-center p-4 rounded-2">
+            <h3 class="fw-bold text-dark mb-2"><%= @total_bands %></h3>
+            <p class="text-muted mb-0">Bands</p>
+         </div>
+      </div>
+      <div class="col-md-3">
+         <div class="stat-card text-center p-4 rounded-2">
+            <h3 class="fw-bold text-dark mb-2"><%= @total_albums %></h3>
+            <p class="text-muted mb-0">Albums</p>
+         </div>
+      </div>
+      <div class="col-md-3">
+         <div class="stat-card text-center p-4 rounded-2">
+            <h3 class="fw-bold text-dark mb-2"><%= @total_genres + @total_styles %></h3>
+            <p class="text-muted mb-0">Genres & Styles</p>
+         </div>
+      </div>
+   </div>
+   <div class="row g-4 mb-5">
+      <div class="col-md-6">
+         <div class="card h-100 feature-card border-0 text-center p-4 rounded-2">
+            <div class="feature-icon mb-3">
+               <i class="bi bi-music-note-list"></i>
+            </div>
+            <h5 class="fw-semibold mb-3">Bands</h5>
+            <p class="text-muted mb-3">Explore bands, genres and music styles intuitively.</p>
+            <%= link_to bands_path, class: "btn btn-dark btn-sm mt-2 feature-btn" do %>
+            View Bands <i class="bi bi-arrow-right ms-1"></i>
+            <% end %>
+         </div>
+      </div>
+      <div class="col-md-6">
+         <div class="card h-100 feature-card border-0 text-center p-4 rounded-2">
+            <div class="feature-icon mb-3">
+               <i class="bi bi-collection-play"></i>
+            </div>
+            <h5 class="fw-semibold mb-3">Albums</h5>
+            <p class="text-muted mb-3">View and manage your album collection with ease.</p>
+            <%= link_to albums_path, class: "btn btn-dark btn-sm mt-2 feature-btn" do %>
+            View Albums <i class="bi bi-arrow-right ms-1"></i>
+            <% end %>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="favorites-section text-center p-5 rounded-2 mb-4">
+   <h2 class="fw-bold mb-3">Your Favorites</h2>
+   <p class="text-muted mb-4">Quickly access your favorite albums and bands.</p>
+   <%= link_to favorites_path, class: "btn btn-primary btn-lg px-4 py-2 favorites-btn" do %>
+   <i class="bi bi-heart-fill me-2"></i>My Favorites
+   <% end %>
+</div>
+</div>

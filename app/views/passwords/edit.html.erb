@@ -1,0 +1,40 @@
+<div class="container-md py-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm border-0 rounded-3">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center rounded-top-3">
+          <h4 class="mb-0 fw-semibold">
+            <i class="bi bi-key me-2"></i> Update Password
+          </h4>
+        </div>
+
+        <div class="card-body bg-light">
+
+          <% if flash[:alert] %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <%= flash[:alert] %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <% end %>
+
+          <%= form_with url: password_path(params[:token]), method: :put, local: true do |form| %>
+            <div class="mb-3">
+              <%= form.label :password, "New Password", class: "form-label fw-semibold text-muted" %>
+              <%= form.password_field :password, class: "form-control", required: true, autocomplete: "new-password", placeholder: "Enter new password", maxlength: 72 %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :password_confirmation, "Confirm Password", class: "form-label fw-semibold text-muted" %>
+              <%= form.password_field :password_confirmation, class: "form-control", required: true, autocomplete: "new-password", placeholder: "Repeat new password", maxlength: 72 %>
+            </div>
+
+            <div class="d-flex justify-content-end">
+              <%= form.submit "Save", class: "btn btn-success" %>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

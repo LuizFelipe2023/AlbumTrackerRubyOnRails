@@ -1,0 +1,49 @@
+<%= form_with(model: style, local: true, class: "style-form") do |form| %>
+  <div class="row mb-4">
+    <div class="col-md-6 mb-3">
+      <%= form.label :name, "Style Name", class: "form-label fw-medium text-dark mb-2" %>
+      <%= form.text_field :name, class: "form-control rounded-0 border", placeholder: "Enter style name" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= form.label :genre_id, "Genre", class: "form-label fw-medium text-dark mb-2" %>
+      <%= form.collection_select :genre_id, Genre.all, :id, :name, { prompt: "Select a genre" }, class: "form-select rounded-0 border" %>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center pt-3 border-top" style="border-color: #e0e0e0 !important;">
+    <div class="text-muted small">
+      <i class="bi bi-info-circle me-1"></i>
+      <%= style.persisted? ? "Update style information" : "Create new music style" %>
+    </div>
+    <div class="d-flex gap-2">
+      <%= link_to styles_path, class: "btn btn-outline-secondary rounded-0 border px-4 d-flex align-items-center" do %>
+        <i class="bi bi-x-circle me-2"></i>Cancel
+      <% end %>
+      <%= form.submit (style.persisted? ? "Update Style" : "Create Style"), class: "btn btn-dark rounded-0 border-0 px-4" %>
+    </div>
+  </div>
+<% end %>
+
+<script>
+// Optional: Add form validation enhancements
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.querySelector('.style-form');
+  
+  if (form) {
+    const inputs = form.querySelectorAll('.form-control, .form-select');
+    
+    inputs.forEach(input => {
+      input.addEventListener('focus', function() {
+        this.style.borderColor = '#333';
+      });
+      
+      input.addEventListener('blur', function() {
+        if (!this.value) {
+          this.style.borderColor = '#e0e0e0';
+        }
+      });
+    });
+  }
+});
+</script>

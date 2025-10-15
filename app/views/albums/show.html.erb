@@ -1,0 +1,173 @@
+<div class="container-md py-4">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-10">
+      <div class="card border-0 rounded-0" style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-3 px-4 border-0 rounded-0">
+          <h5 class="mb-0 fw-semibold">
+            <i class="bi bi-disc me-2"></i>
+            Album Details
+          </h5>
+          <div class="d-flex justify-content-end gap-2">
+            <%= render 'shared/favorites_buttons', album: @album %>
+            <%= link_to new_review_path(album_id: @album.id), class: "btn btn-outline-light btn-sm border d-flex align-items-center" do %>
+              <i class="bi bi-plus-circle me-2"></i>Add Review
+            <% end %>
+            <%= link_to album_reviews_path(@album), class: "btn btn-outline-light btn-sm border d-flex align-items-center" do %>
+              <i class="bi bi-chat-square-text me-2"></i>Reviews
+            <% end %>
+            <%= link_to albums_path, class: "btn btn-outline-light btn-sm border d-flex align-items-center" do %>
+              <i class="bi bi-arrow-left me-2"></i>Back
+            <% end %>
+          </div>
+        </div>
+
+        <div class="card-body bg-white p-4">
+          <% if flash[:notice] %>
+            <div class="alert alert-success alert-dismissible fade show rounded-0 border-0 mb-4" style="background-color: #f0f9f0; color: #2d5c2d; border-left: 4px solid #28a745;" role="alert">
+              <i class="bi bi-check-circle me-2"></i><%= flash[:notice] %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <% end %>
+
+          <% if flash[:alert] %>
+            <div class="alert alert-danger alert-dismissible fade show rounded-0 border-0 mb-4" style="background-color: #fdf0f0; color: #8b2a2a; border-left: 4px solid #dc3545;" role="alert">
+              <i class="bi bi-exclamation-triangle me-2"></i><%= flash[:alert] %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <% end %>
+          
+          <div class="text-center mb-4">
+            <% if @album.cover.attached? %>
+              <%= image_tag url_for(@album.cover), class: "rounded-0 border", style: "max-width: 200px;" %>
+            <% else %>
+              <div class="bg-light d-inline-block p-4 border">
+                <i class="bi bi-disc" style="font-size: 3rem; color: #ccc;"></i>
+              </div>
+              <p class="text-muted small mt-2">No cover available</p>
+            <% end %>
+          </div>
+
+          <div class="album-info-section">
+            <div class="row mb-4">
+              <div class="col-md-4 mb-3">
+                <label class="form-label fw-medium text-dark mb-2">Release Year</label>
+                <div class="form-control-plaintext border-bottom pb-2" style="color: #333; min-height: auto; padding-left: 0;">
+                  <%= @album.release_year %>
+                </div>
+              </div>
+              
+              <div class="col-md-4 mb-3">
+                <label class="form-label fw-medium text-dark mb-2">Bands</label>
+                <div class="form-control-plaintext border-bottom pb-2" style="color: #333; min-height: auto; padding-left: 0;">
+                  <% if @album.bands.any? %>
+                    <div class="d-flex flex-wrap gap-1">
+                      <% @album.bands.each do |band| %>
+                        <span class="badge bg-dark rounded-0" style="font-size: 0.75rem; font-weight: 400;">
+                          <%= band.name %>
+                        </span>
+                      <% end %>
+                    </div>
+                  <% else %>
+                    <span class="text-muted">—</span>
+                  <% end %>
+                </div>
+              </div>
+
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <label class="form-label fw-medium text-dark mb-2">Genres</label>
+                <div class="form-control-plaintext border-bottom pb-2 px-0" style="color: #333; min-height: auto;">
+                  <% if @album.genres.any? %>
+                    <div class="d-flex flex-wrap justify-content-start gap-1">
+                      <% @album.genres.each do |genre| %>
+                        <span class="badge bg-light text-dark border rounded" 
+                              style="font-size: 0.75rem; font-weight: 400; min-width: 60px; text-align: center; display: inline-flex; justify-content: center; align-items: center;">
+                          <%= genre.name %>
+                        </span>
+                      <% end %>
+                    </div>
+                  <% else %>
+                    <span class="text-muted">—</span>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label fw-medium text-dark mb-2">Music Styles</label>
+              <div class="form-control-plaintext border-bottom pb-2 px-0" style="color: #333; min-height: auto;">
+                <% if @album.styles.any? %>
+                  <div class="d-flex flex-wrap justify-content-start gap-1">
+                    <% @album.styles.each do |style| %>
+                      <span class="badge bg-light text-dark border rounded" 
+                            style="font-size: 0.75rem; font-weight: 400; min-width: 60px; text-align: center; display: inline-flex; justify-content: center; align-items: center;">
+                        <%= style.name %>
+                      </span>
+                    <% end %>
+                  </div>
+                <% else %>
+                  <span class="text-muted">—</span>
+                <% end %>
+              </div>
+            </div>
+
+
+            <% if @album.created_at.present? %>
+              <div class="mb-4">
+                <label class="form-label fw-medium text-dark mb-2">Added to Collection</label>
+                <div class="form-control-plaintext border-bottom pb-2" style="color: #666; min-height: auto; padding-left: 0; font-size: 0.9rem;">
+                  <%= @album.created_at.strftime("%B %d, %Y") %>
+                </div>
+              </div>
+            <% end %>
+
+            <div class="mb-4">
+              <label class="form-label fw-medium text-dark mb-2">Album ID</label>
+              <div class="form-control-plaintext border-bottom pb-2" style="color: #666; min-height: auto; padding-left: 0; font-size: 0.9rem;">
+                #<%= @album.id %>
+              </div>
+            </div>
+          </div>
+
+          <% if @album.tracklist.present? %>
+            <div class="mt-4">
+              <label class="form-label fw-medium text-dark mb-2">Tracklist</label>
+              <div class="border rounded-0 bg-white p-3 tracklist-container">
+                <ul class="list-group list-group-flush mb-0">
+                  <% @album.tracklist.each_with_index do |track, index| %>
+                    <li class="list-group-item d-flex align-items-center border-bottom py-2 px-3" style="background-color: transparent;">
+                      <span class="me-3 text-muted" style="width: 30px; text-align: center;">
+                        <%= index + 1 %>.
+                      </span>
+                      <span style="color: #333; font-size: 0.9rem;">
+                        <%= track %>
+                      </span>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          <% end %>
+
+
+
+        </div>
+
+        <div class="card-footer bg-light text-muted small py-3 px-4 border-0 border-top" style="border-color: #e0e0e0 !important;">
+          <div class="d-flex justify-content-between align-items-center">
+            <span>
+              <i class="bi disc me-1"></i> 
+              Album Information
+            </span>
+            <div class="d-flex gap-2">
+              <%= link_to edit_album_path(@album), class: "btn btn-dark rounded-0 border-0 btn-sm px-3 d-flex align-items-center" do %>
+                <i class="bi bi-pencil me-2"></i>Edit Album
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,162 @@
+<div class="container-md py-4">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-12">
+      <div class="card border-0 rounded-0" style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-3 px-4 border-0 rounded-0">
+          <h5 class="mb-0 fw-semibold">
+            <i class="bi bi-disc me-2"></i>
+            Music Albums
+          </h5>
+          <%= link_to new_album_path, class: "btn btn-outline-light btn-sm border d-flex align-items-center" do %>
+            <i class="bi bi-plus-circle me-2"></i> Add Album
+          <% end %>
+        </div>
+
+        <div class="card-body bg-white p-0">
+          <% if @albums.any? %>
+            <div class="table-container">
+              <table class="table table-hover align-middle mb-0 rounded-0 border-0">
+                <thead class="bg-light text-dark border-bottom" style="border-color: #e0e0e0 !important;">
+                  <tr>
+                    <th scope="col" class="text-center py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem; letter-spacing: 0.5px; width: 80px;">Cover</th>
+                    <th scope="col" class="py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem; letter-spacing: 0.5px;">Album Title</th>
+                    <th scope="col" class="text-center py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem; letter-spacing: 0.5px; width: 100px;">Year</th>
+                    <th scope="col" class="text-center py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem; letter-spacing: 0.5px;">Bands</th>
+                    <th scope="col" class="text-center py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem; letter-spacing: 0.5px;">Genres</th>
+                    <th scope="col" class="text-center py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem; letter-spacing: 0.5px;">Styles</th>
+                    <th scope="col" class="text-center py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem; letter-spacing: 0.5px; width: 100px;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white">
+                  <% @albums.each do |album| %>
+                    <tr class="border-bottom" style="border-color: #f0f0f0 !important;">
+                     
+                      <td class="text-center py-3 border-0">
+                        <% if album.cover.attached? %>
+                          <%= image_tag url_for(album.cover), class: "rounded-0 border", style: "width:50px; height:50px; object-fit:cover;" %>
+                        <% else %>
+                          <div class="bg-light d-flex align-items-center justify-content-center rounded-0 border" style="width:50px; height:50px; margin: 0 auto;">
+                            <i class="bi bi-disc text-muted"></i>
+                          </div>
+                        <% end %>
+                      </td>
+
+                      <td class="py-3 border-0 fw-medium" style="color: #333;">
+                        <%= album.title %>
+                      </td>
+
+                      <td class="text-center py-3 border-0" style="color: #666;">
+                        <%= album.release_year %>
+                      </td>
+
+                      <td class="text-center py-3 border-0">
+                        <% if album.bands.any? %>
+                          <div class="text-center">
+                            <% album.bands.each do |band| %>
+                              <span class="badge bg-dark rounded-0 d-inline-block mx-1 mb-1 text-center" 
+                                    style="font-size: 0.7rem; min-width: 70px; padding: 3px 6px;">
+                                <%= band.name %>
+                              </span>
+                            <% end %>
+                          </div>
+                        <% else %>
+                          <span class="text-muted">—</span>
+                        <% end %>
+                      </td>
+
+                      <td class="text-center py-3 border-0">
+                        <% if album.genres.any? %>
+                          <div class="d-flex flex-wrap justify-content-center">
+                            <% album.genres.each do |genre| %>
+                              <span class="badge bg-light text-dark border m-1 px-2 py-1">
+                                <%= genre.name %>
+                              </span>
+                            <% end %>
+                          </div>
+                        <% else %>
+                          <span class="text-muted">—</span>
+                        <% end %>
+                      </td>
+
+                      <td class="text-center py-3 border-0">
+                        <% if album.styles.any? %>
+                          <div class="d-flex flex-wrap justify-content-center">
+                            <% album.styles.each do |style| %>
+                              <span class="badge bg-light text-dark border m-1 px-2 py-1">
+                                <%= style.name %>
+                              </span>
+                            <% end %>
+                          </div>
+                        <% else %>
+                          <span class="text-muted">—</span>
+                        <% end %>
+                      </td>
+
+
+                      <td class="text-center py-3 border-0">
+                        <div class="d-flex justify-content-center gap-1">
+                          <%= link_to album_path(album), class: "btn btn-sm border-0 rounded-0 action-btn", title: "View album", data: { bs_toggle: "tooltip" } do %>
+                            <i class="bi bi-eye" style="color: #666;"></i>
+                          <% end %>
+
+                          <%= link_to edit_album_path(album), class: "btn btn-sm border-0 rounded-0 action-btn", title: "Edit album", data: { bs_toggle: "tooltip" } do %>
+                            <i class="bi bi-pencil" style="color: #666;"></i>
+                          <% end %>
+
+                          <button type="button" class="btn btn-sm border-0 rounded-0 action-btn"
+                                  data-bs-toggle="modal" data-bs-target="#deleteAlbumModal<%= album.id %>"
+                                  title="Delete album" data-bs-toggle="tooltip">
+                            <i class="bi bi-trash" style="color: #666;"></i>
+                          </button>
+
+                          <div class="modal fade" id="deleteAlbumModal<%= album.id %>" tabindex="-1"
+                              aria-labelledby="deleteAlbumModalLabel<%= album.id %>" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content border-0 rounded-0" style="box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+                                <div class="modal-header bg-white border-bottom py-3">
+                                  <h5 class="modal-title fw-semibold" id="deleteAlbumModalLabel<%= album.id %>" style="color: #333;">
+                                    <i class="bi bi-exclamation-octagon me-2 text-danger"></i>Confirm Deletion
+                                  </h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body text-center py-4">
+                                  <p class="mb-2" style="color: #333;">Are you sure you want to delete</p>
+                                  <p class="fw-semibold mb-1" style="color: #333; font-size: 1.1rem;">"<%= album.title %>"</p>
+                                  <% if album.release_year %>
+                                    <p class="text-muted small mb-0">Released: <%= album.release_year %></p>
+                                  <% end %>
+                                  <p class="text-muted small mt-3">This action cannot be undone</p>
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center border-0 pt-0">
+                                  <button type="button" class="btn btn-outline-secondary rounded-0 px-4 border" data-bs-dismiss="modal">
+                                    Cancel
+                                  </button>
+                                  <%= button_to album_path(album), method: :delete, form_class: "d-inline", class: "btn btn-dark rounded-0 px-4 border-0" do %>
+                                    Delete
+                                  <% end %>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          <% else %>
+            <div class="text-center py-5">
+              <i class="bi bi-disc display-4 mb-3" style="color: #ccc;"></i>
+              <p class="text-muted mb-2 fs-5">No albums found</p>
+              <p class="text-muted small mb-4">Start building your music collection</p>
+              <%= link_to new_album_path, class: "btn btn-dark rounded-0 border-0 px-4" do %>
+                <i class="bi bi-plus-circle me-2"></i>Add First Album
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

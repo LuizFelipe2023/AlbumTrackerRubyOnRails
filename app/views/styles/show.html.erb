@@ -1,0 +1,81 @@
+<div class="container-md py-4">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card border-0 rounded-0" style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        
+        <!-- Card Header -->
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-3 px-4 border-0 rounded-0">
+          <h5 class="mb-0 fw-semibold">
+            <i class="bi bi-tag me-2"></i>
+            Style Details
+          </h5>
+          <%= link_to styles_path, class: "btn btn-outline-light btn-sm border d-flex align-items-center" do %>
+            <i class="bi bi-arrow-left me-2"></i> Back to Styles
+          <% end %>
+        </div>
+
+        <!-- Card Body -->
+        <div class="card-body bg-white p-4">
+          <!-- Flash Messages -->
+          <% if flash[:notice] %>
+            <div class="alert alert-success alert-dismissible fade show rounded-0 border-0 mb-4" style="background-color: #f0f9f0; color: #2d5c2d; border-left: 4px solid #28a745;" role="alert">
+              <i class="bi bi-check-circle me-2"></i><%= flash[:notice] %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <% end %>
+
+          <% if flash[:alert] %>
+            <div class="alert alert-danger alert-dismissible fade show rounded-0 border-0 mb-4" style="background-color: #fdf0f0; color: #8b2a2a; border-left: 4px solid #dc3545;" role="alert">
+              <i class="bi bi-exclamation-triangle me-2"></i><%= flash[:alert] %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <% end %>
+
+          <div class="style-info-section">
+            <div class="mb-4">
+              <label class="form-label fw-medium text-dark mb-2">Style Name</label>
+              <div class="form-control-plaintext border-bottom pb-2" style="color: #333; min-height: auto; padding-left: 0; font-size: 1.1rem;">
+                <%= @style.name %>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label fw-medium text-dark mb-2">Genre</label>
+              <div class="form-control-plaintext border-bottom pb-2" style="color: #333; min-height: auto; padding-left: 0;">
+                <span class="badge bg-dark rounded-0"><%= @style.genre.name %></span>
+              </div>
+            </div>
+
+            <% if @style.created_at.present? %>
+              <div class="mb-4">
+                <label class="form-label fw-medium text-dark mb-2">Added</label>
+                <div class="form-control-plaintext border-bottom pb-2" style="color: #666; min-height: auto; padding-left: 0; font-size: 0.9rem;">
+                  <%= @style.created_at.strftime("%B %d, %Y") %>
+                </div>
+              </div>
+            <% end %>
+
+            <div class="mb-4">
+              <label class="form-label fw-medium text-dark mb-2">Style ID</label>
+              <div class="form-control-plaintext border-bottom pb-2" style="color: #666; min-height: auto; padding-left: 0; font-size: 0.9rem;">
+                #<%= @style.id %>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center pt-3 border-top" style="border-color: #e0e0e0 !important;">
+            <div class="text-muted small">
+              <i class="bi bi-info-circle me-1"></i>
+              Music Style Information
+            </div>
+            <div class="d-flex gap-2">
+              <%= link_to edit_style_path(@style), class: "btn btn-dark rounded-0 border-0 px-4 d-flex align-items-center" do %>
+                <i class="bi bi-pencil me-2"></i>Edit Style
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
