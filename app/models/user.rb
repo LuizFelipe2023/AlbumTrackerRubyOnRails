@@ -7,10 +7,8 @@ class User < ApplicationRecord
   validates :name, presence: true, length: {minimum:2, maximum:255}
   validates :username, presence: true, length: {minimum:2, maximum:255}
 
-  has_many :favorites, dependent: :destroy
-
-  has_many :favorite_bands
-  has_many :favorite_albums
+  has_many :favorite_bands, dependent: :destroy
+  has_many :favorite_albums, dependent: :destroy
   has_many :favorited_bands, through: :favorite_bands, source: :band
   has_many :favorited_albums, through: :favorite_albums, source: :album
 

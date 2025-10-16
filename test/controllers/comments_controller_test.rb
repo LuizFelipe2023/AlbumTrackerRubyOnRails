@@ -2,47 +2,55 @@ require "test_helper"
 
 class CommentsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @comment = comments(:one)
-  end
 
-  test "should get index" do
-    get comments_url
-    assert_response :success
-  end
+    @user = User.create!(
+      name: "Test User",
+      username: "testuser",
+      email_address: "test@example.com",
+      password: "password",
+      password_confirmation: "password"
+    )
 
-  test "should get new" do
-    get new_comment_url
-    assert_response :success
+    @topic = Topic.create!(
+      title: "Test Topic",
+      description: "This is a test topic",
+      user: @user
+    )
+
+    @post = Post.create!(
+      title: "Test Post",
+      content: "This is a test post",
+      user: @user,
+      topic: @topic
+    )
+
+    @comment = Comment.create!(
+      content: "This is a test comment",
+      post: @post,
+      user: @user
+    )
+
+    post sessions_url, params: { email_address: @user.email_address, password: "password" }
   end
 
   test "should create comment" do
-    assert_difference("Comment.count") do
-      post comments_url, params: { comment: { content: @comment.content, post_id: @comment.post_id, user_id: @comment.user_id } }
+    assert_difference("Comment.count", 1) do
+      post post_comments_path(@post), params: { comment: { content: "Another comment", user_id: @user.id } }
     end
 
-    assert_redirected_to comment_url(Comment.last)
-  end
-
-  test "should show comment" do
-    get comment_url(@comment)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_comment_url(@comment)
-    assert_response :success
+    assert_redirected_to post_path(@post)
   end
 
   test "should update comment" do
-    patch comment_url(@comment), params: { comment: { content: @comment.content, post_id: @comment.post_id, user_id: @comment.user_id } }
-    assert_redirected_to comment_url(@comment)
+    patch post_comment_path(@post, @comment), params: { comment: { content: "Updated content" } }
+    assert_redirected_to post_path(@post)
   end
 
   test "should destroy comment" do
     assert_difference("Comment.count", -1) do
-      delete comment_url(@comment)
+      delete post_comment_path(@post, @comment)
     end
 
-    assert_redirected_to comments_url
+    assert_redirected_to post_path(@post)
   end
 end

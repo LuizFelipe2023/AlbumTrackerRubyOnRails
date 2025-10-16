@@ -2,7 +2,7 @@ class GenresController < ApplicationController
   before_action :set_genre, only: %i[ show edit update destroy ]
 
   def index
-    @genres = Genre.order(:name).page(params[:page]).per(10)
+     @genres = Genre.order(:name).page(params[:page]).per(10) || []
   end
 
   def show
