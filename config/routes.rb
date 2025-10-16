@@ -1,16 +1,23 @@
 Rails.application.routes.draw do
   get "home/index"
+  
   resource :sessions
   resources :passwords, param: :token
+  resources :users
+
+  resources :topics
+  resources :posts do
+    resources :comments, only: [:create, :edit, :update, :destroy]
+  end
+
   resources :genres
   resources :bands
   resources :styles
-  resources :users 
   resources :reviews
-  root "root#index"  
+  resources :albums do
+    get 'reviews', to: 'reviews#album_reviews', as: :reviews
+  end
 
-  get "up" => "rails/health#show", as: :rails_health_check
-  
   resources :favorites, only: [:index] do
     collection do
       post   'favorite_album'
@@ -20,8 +27,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :albums do
-    get 'reviews', to: 'reviews#album_reviews', as: :reviews
-  end
-  
+  root "root#index"
+
+  get "up" => "rails/health#show", as: :rails_health_check
 end

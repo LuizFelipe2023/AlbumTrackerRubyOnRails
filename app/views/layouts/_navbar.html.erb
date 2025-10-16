@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-xl navbar-dark bg-dark border-bottom border-secondary">
   <div class="container-md">
-    <!-- Logo/Brand -->
+   
     <a class="navbar-brand d-flex align-items-center fw-bold text-white" href="<%= home_index_path %>">
       <i class="bi bi-vinyl-fill me-2 text-primary"></i>
       <span class="brand-text">ALBUMTRACKER</span>
@@ -29,7 +29,6 @@
               <li class="dropend">
                 <a class="dropdown-item dropdown-toggle d-flex justify-content-between align-items-center text-light bg-dark" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside">
                   <span><i class="bi bi-disc me-1"></i> Albums</span>
-                  <i class="bi bi-chevron-right"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark border-secondary bg-dark">
                   <li><%= link_to albums_path, class: "dropdown-item text-light bg-dark" do %>
@@ -43,7 +42,6 @@
               <li class="dropend">
                 <a class="dropdown-item dropdown-toggle d-flex justify-content-between align-items-center text-light bg-dark" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside">
                   <span><i class="bi bi-chat-square-text me-1"></i> Reviews</span>
-                  <i class="bi bi-chevron-right"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark border-secondary bg-dark">
                   <li><%= link_to reviews_path, class: "dropdown-item text-light bg-dark" do %>
@@ -51,6 +49,41 @@
                   <% end %></li>
                   <li><%= link_to new_review_path, class: "dropdown-item text-light bg-dark" do %>
                     <i class="bi bi-plus-circle me-2"></i> Add Review
+                  <% end %></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle px-3 text-white fw-medium" href="#" id="forumDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-chat-dots me-1"></i> Forum
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark border-secondary bg-dark" aria-labelledby="forumDropdown">
+              <li class="dropend">
+                <a class="dropdown-item dropdown-toggle d-flex justify-content-between align-items-center text-light bg-dark" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                  <span><i class="bi bi-collection me-1"></i> Topics</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark border-secondary bg-dark">
+                  <li><%= link_to topics_path, class: "dropdown-item text-light bg-dark" do %>
+                    <i class="bi bi-list-ul me-2"></i> All Topics
+                  <% end %></li>
+                  <li><%= link_to new_topic_path, class: "dropdown-item text-light bg-dark" do %>
+                    <i class="bi bi-plus-circle me-2"></i> New Topic
+                  <% end %></li>
+                </ul>
+              </li>
+              <li class="dropend">
+                <a class="dropdown-item dropdown-toggle d-flex justify-content-between align-items-center text-light bg-dark" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                  <span><i class="bi bi-chat-square-text me-1"></i> Posts</span>
+                  
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark border-secondary bg-dark">
+                  <li><%= link_to posts_path, class: "dropdown-item text-light bg-dark" do %>
+                    <i class="bi bi-list-ul me-2"></i> All Posts
+                  <% end %></li>
+                  <li><%= link_to new_post_path, class: "dropdown-item text-light bg-dark" do %>
+                    <i class="bi bi-plus-circle me-2"></i> New Post
                   <% end %></li>
                 </ul>
               </li>

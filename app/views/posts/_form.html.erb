@@ -1,0 +1,56 @@
+<div class="container-md py-4">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-10 col-lg-8">
+      <div class="card border-0 rounded-0" style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-3 px-4 border-0 rounded-0">
+          <h5 class="mb-0 fw-semibold">
+            <i class="bi bi-pencil-square me-2"></i>
+            <%= post.persisted? ? "Edit Post" : "New Post" %>
+          </h5>
+          <%= link_to posts_path, class: "btn btn-outline-light btn-sm border d-flex align-items-center" do %>
+            <i class="bi bi-arrow-left me-2"></i>Back to Posts
+          <% end %>
+        </div>
+
+        <div class="card-body bg-white p-4">
+          <%= form_with(model: post, local: true, class: "post-form") do |form| %>
+
+            <% if post.errors.any? %>
+              <div class="alert alert-danger mb-3">
+                <h6><%= pluralize(post.errors.count, "error") %> proibiu este post de ser salvo:</h6>
+                <ul class="mb-0">
+                  <% post.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="mb-4">
+              <%= form.label :title, "Post Title", class: "form-label fw-medium text-dark mb-2" %>
+              <%= form.text_field :title, class: "form-control rounded-0 border", placeholder: "Enter post title" %>
+            </div>
+
+            <div class="mb-4">
+              <%= form.label :content, "Content", class: "form-label fw-medium text-dark mb-2" %>
+              <%= form.text_area :content, class: "form-control rounded-0 border", placeholder: "Write your post", rows: 8 %>
+            </div>
+
+            <div class="mb-4">
+              <%= form.label :topic_id, "Select Topic", class: "form-label fw-medium text-dark mb-2" %>
+              <%= form.collection_select :topic_id, Topic.all, :id, :title,
+                    { prompt: "Choose a topic" },
+                    { class: "form-select rounded-0 choices-topic", style: "min-width: 160px; padding: 4px 12px; font-size: 0.9rem;" } %>
+            </div>
+
+            <div class="d-flex justify-content-end pt-3 border-top" style="border-color: #e0e0e0 !important;">
+              <%= form.submit (post.persisted? ? "Update Post" : "Create Post"), class: "btn btn-dark rounded-0 border-0 px-4" %>
+            </div>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

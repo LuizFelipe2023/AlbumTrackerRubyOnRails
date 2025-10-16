@@ -67,7 +67,15 @@ import "./css/showAlbum.css"
 import "./css/reviews.css"                 
 import "./css/reviewForm.css"              
 import "./css/showReview.css"              
-import "./css/albums_reviews.css"          
+import "./css/albums_reviews.css"   
+
+import "./css/topics.css"
+import "./css/topicForm.css"
+import "./css/topicShow.css"
+
+import "./css/posts.css"
+import "./css/postForm.css"
+import "./css/postShow.css"
 
 import { initFavorites } from "./js/favorites";
 import { initializeUserForm } from "./js/userForm";
@@ -86,6 +94,15 @@ document.addEventListener("DOMContentLoaded", () => {
       shouldSort: false
     });
   });
+
+  const topicSelect = document.querySelector(".choices-topic");
+  if (topicSelect) {
+    new Choices(topicSelect, {
+      searchEnabled: true,
+      shouldSort: false,
+      itemSelectText: ""
+    });
+  }
 
   initFavorites()
   initializeUserForm()

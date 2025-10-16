@@ -14,7 +14,11 @@ class User < ApplicationRecord
   has_many :favorited_bands, through: :favorite_bands, source: :band
   has_many :favorited_albums, through: :favorite_albums, source: :album
 
-  has_many :reviews 
+  has_many :reviews, dependent: :destroy
+  
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :topics, dependent: :destroy
 
   enum :role, { user: 0, admin: 1 }
 

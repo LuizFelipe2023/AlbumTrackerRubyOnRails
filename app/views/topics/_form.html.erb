@@ -1,0 +1,47 @@
+<div class="container-md py-4">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-10 col-lg-8">
+      <div class="card border-0 rounded-0" style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-3 px-4 border-0 rounded-0">
+          <h5 class="mb-0 fw-semibold">
+            <i class="bi bi-chat-square-text me-2"></i>
+            <%= topic.persisted? ? "Edit Topic" : "New Topic" %>
+          </h5>
+          <%= link_to topics_path, class: "btn btn-outline-light btn-sm border d-flex align-items-center" do %>
+            <i class="bi bi-arrow-left me-2"></i> Back to Topics
+          <% end %>
+        </div>
+
+        <div class="card-body bg-white p-4">
+          <%= form_with(model: topic, local: true, class: "topic-form") do |form| %>
+
+            <div class="mb-4">
+              <%= form.label :title, "Topic Title", class: "form-label fw-medium text-dark mb-2" %>
+              <%= form.text_field :title, class: "form-control rounded-0 border", placeholder: "Enter topic title" %>
+            </div>
+
+            <div class="mb-4">
+              <%= form.label :description, "Description", class: "form-label fw-medium text-dark mb-2" %>
+              <%= form.text_area :description, class: "form-control rounded-0 border", placeholder: "Describe the topic", rows: 4 %>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center pt-3 border-top" style="border-color: #e0e0e0 !important;">
+              <div class="text-muted small">
+                <i class="bi bi-info-circle me-1"></i>
+                <%= topic.persisted? ? "Update topic information" : "Create new topic" %>
+              </div>
+              <div class="d-flex gap-2">
+                <%= link_to topics_path, class: "btn btn-outline-secondary rounded-0 border px-4 d-flex align-items-center" do %>
+                  <i class="bi bi-x-circle me-2"></i>Cancel
+                <% end %>
+                <%= form.submit (topic.persisted? ? "Update Topic" : "Create Topic"), class: "btn btn-dark rounded-0 border-0 px-4" %>
+              </div>
+            </div>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

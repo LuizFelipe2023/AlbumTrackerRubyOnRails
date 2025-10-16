@@ -1,0 +1,105 @@
+.post-form .form-control,
+.post-form .form-select {
+  border-color: #e0e0e0 !important;
+  border-radius: 0;
+  padding: 10px 12px;
+  background-color: white;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.post-form .form-control:focus,
+.post-form .form-select:focus {
+  border-color: #333 !important;
+  box-shadow: 0 0 0 2px rgba(51, 51, 51, 0.1);
+  background-color: white;
+}
+
+.post-form .form-label {
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+}
+
+.post-form textarea.form-control {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.btn-dark {
+  background-color: #333;
+  border: none;
+  font-weight: 500;
+  padding: 10px 24px;
+}
+
+.btn-dark:hover {
+  background-color: #000;
+}
+
+.btn-outline-light {
+  border-color: #fff;
+  color: #fff;
+  font-size: 0.9rem;
+  padding: 6px 12px;
+}
+
+.btn-outline-light:hover {
+  background-color: #fff;
+  color: #333;
+}
+
+.btn-outline-secondary {
+  border-color: #6c757d;
+  color: #6c757d;
+  padding: 10px 24px;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .card-header {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .card-body {
+    padding: 1.5rem !important;
+  }
+
+  .d-flex.justify-content-between {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .d-flex.gap-2 {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.post-form .form-control.is-invalid,
+.post-form .form-select.is-invalid {
+  border-color: #dc3545 !important;
+}
+
+.post-form .form-control.is-valid,
+.post-form .form-select.is-valid {
+  border-color: #198754 !important;
+}
+
+.post-form .form-select {
+  min-width: 160px; 
+  padding: 4px 12px;
+  font-size: 0.9rem;
+}
+.post-form .form-label {
+  font-size: 0.9rem;
+  color: #333;
+}
+

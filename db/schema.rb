@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_15_125010) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_16_131736) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -89,6 +89,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_15_125010) do
     t.bigint "style_id", null: false
   end
 
+  create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "post_id", null: false
+    t.bigint "user_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "favorite_albums", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "album_id", null: false
@@ -113,6 +123,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_15_125010) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "topic_id", null: false
+    t.bigint "user_id", null: false
+    t.string "title"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["topic_id"], name: "index_posts_on_topic_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "reviews", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -144,6 +165,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_15_125010) do
     t.index ["genre_id"], name: "index_styles_on_genre_id"
   end
 
+  create_table "topics", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_topics_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email_address", null: false
     t.string "password_digest", null: false
@@ -158,12 +188,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_15_125010) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bands", "genres"
+  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
   add_foreign_key "favorite_albums", "albums"
   add_foreign_key "favorite_albums", "users"
   add_foreign_key "favorite_bands", "bands"
   add_foreign_key "favorite_bands", "users"
+  add_foreign_key "posts", "topics"
+  add_foreign_key "posts", "users"
   add_foreign_key "reviews", "albums"
   add_foreign_key "reviews", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "styles", "genres"
+  add_foreign_key "topics", "users"
 end
