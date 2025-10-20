@@ -72,7 +72,9 @@
                 <label class="form-label fw-medium text-dark mb-2">Genre</label>
                 <div class="form-control-plaintext border-bottom pb-2" style="color: #333; min-height: auto; padding-left: 0;">
                   <% if @band.genre %>
-                    <span class="badge bg-dark rounded-0"><%= @band.genre.name %></span>
+                    <span class="badge bg-dark rounded-0" style="font-size: 0.75rem; font-weight: 400;">
+                      <%= @band.genre.name %>
+                    </span>
                   <% else %>
                     <span class="text-muted">—</span>
                   <% end %>
@@ -83,13 +85,14 @@
             <% if @band.styles.any? %>
               <div class="mb-4">
                 <label class="form-label fw-medium text-dark mb-2">Music Styles</label>
-                <div class="form-control-plaintext border-bottom pb-2 text-center">
-                  <% @band.styles.each do |style| %>
-                    <span class="badge bg-light text-dark border rounded-0 d-inline-block mx-1 mb-1" 
-                          style="font-size: 0.75rem; min-width: 80px; padding: 4px 8px;">
-                      <%= style.name %>
-                    </span>
-                  <% end %>
+                <div class="form-control-plaintext border-bottom pb-2" style="color: #333; min-height: auto; padding-left: 0;">
+                  <div class="d-flex flex-wrap gap-1">
+                    <% @band.styles.each do |style| %>
+                      <span class="badge bg-dark rounded-0" style="font-size: 0.75rem; font-weight: 400;">
+                        <%= style.name %>
+                      </span>
+                    <% end %>
+                  </div>
                 </div>
               </div>
             <% end %>

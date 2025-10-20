@@ -15,9 +15,10 @@
 
         <div class="card-body bg-white p-4">
           <div class="review-info-section">
+            
             <div class="mb-4">
               <label class="form-label fw-medium text-dark mb-2">Review Title</label>
-              <div class="form-control-plaintext border-bottom pb-2" style="color: #333; min-height: auto; padding-left: 0; font-size: 1.1rem;">
+              <div class="form-control-plaintext border-bottom pb-2" style="color: #333; font-size: 1.1rem;">
                 <%= @review.title %>
               </div>
             </div>
@@ -29,24 +30,33 @@
               </div>
             </div>
 
+            <div class="mb-4">
+              <label class="form-label fw-medium text-dark mb-2">Album & Band</label>
+              <div class="form-control-plaintext border-bottom pb-2" style="color: #333;">
+                <div class="d-flex align-items-center flex-wrap">
+                  <i class="bi bi-disc me-2 text-muted"></i>
+                  <span class="fw-medium me-2"><%= @review.album.title %></span>
+                  <% if @review.album.bands.any? %>
+                    <span class="text-muted">by</span>
+                    <span class="fw-medium ms-2">
+                      <%= @review.album.bands.map(&:name).join(", ") %>
+                    </span>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+
             <div class="row mb-4">
-              <div class="col-md-4 mb-3">
+              <div class="col-md-6 mb-3">
                 <label class="form-label fw-medium text-dark mb-2">Reviewer</label>
-                <div class="form-control-plaintext border-bottom pb-2" style="color: #333; min-height: auto; padding-left: 0;">
+                <div class="form-control-plaintext border-bottom pb-2" style="color: #333;">
                   <i class="bi bi-person me-2 text-muted"></i><%= @review.user.name %>
                 </div>
               </div>
 
-              <div class="col-md-4 mb-3">
-                <label class="form-label fw-medium text-dark mb-2">Album</label>
-                <div class="form-control-plaintext border-bottom pb-2" style="color: #333; min-height: auto; padding-left: 0;">
-                  <i class="bi bi-disc me-2 text-muted"></i><%= @review.album.title %>
-                </div>
-              </div>
-
-              <div class="col-md-4 mb-3">
+              <div class="col-md-6 mb-3">
                 <label class="form-label fw-medium text-dark mb-2">Rating</label>
-                <div class="form-control-plaintext border-bottom pb-2" style="color: #333; min-height: auto; padding-left: 0;">
+                <div class="form-control-plaintext border-bottom pb-2" style="color: #333;">
                   <div class="d-flex align-items-center">
                     <i class="bi bi-star-fill text-warning me-2"></i>
                     <span class="fw-medium"><%= @review.score %>/10</span>
@@ -55,10 +65,11 @@
               </div>
             </div>
 
+            <!-- Created at -->
             <% if @review.created_at.present? %>
               <div class="mb-4">
                 <label class="form-label fw-medium text-dark mb-2">Review Date</label>
-                <div class="form-control-plaintext border-bottom pb-2" style="color: #666; min-height: auto; padding-left: 0; font-size: 0.9rem;">
+                <div class="form-control-plaintext border-bottom pb-2" style="color: #666; font-size: 0.9rem;">
                   <%= @review.created_at.strftime("%B %d, %Y at %H:%M") %>
                 </div>
               </div>
@@ -66,7 +77,7 @@
 
             <div class="mb-4">
               <label class="form-label fw-medium text-dark mb-2">Review ID</label>
-              <div class="form-control-plaintext border-bottom pb-2" style="color: #666; min-height: auto; padding-left: 0; font-size: 0.9rem;">
+              <div class="form-control-plaintext border-bottom pb-2" style="color: #666; font-size: 0.9rem;">
                 #<%= @review.id %>
               </div>
             </div>
@@ -86,16 +97,21 @@
         </div>
 
         <div class="card-footer bg-light text-muted small py-3 px-4 border-0 border-top" style="border-color: #e0e0e0 !important;">
-          <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex justify-content-between align-items-center flex-wrap">
             <span>
-              <i class="bi bi-chat-square-text me-1"></i> 
-              Review Management
+              <i class="bi bi-chat-square-text me-1"></i> Review Management
             </span>
             <span class="text-muted">
               <%= @review.user.name %> • <%= @review.album.title %>
+              <% if @review.album.bands.any? %>
+                &nbsp; | &nbsp;
+                <i class="bi bi-music-note-list me-1"></i>
+                <%= @review.album.bands.map(&:name).join(", ") %>
+              <% end %>
             </span>
           </div>
         </div>
+
       </div>
     </div>
   </div>

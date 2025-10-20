@@ -1,109 +1,111 @@
 <div class="container-md py-4">
-  <div class="row d-flex justify-content-center">
-    <div class="col-lg-10 col-md-12"> <!-- reduz um pouco a largura para centralizar visualmente -->
+<div class="row d-flex justify-content-center">
+   <div class="col-lg-10 col-md-12">
       <div class="card border-0 rounded-0 shadow-sm">
-
-        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-3 px-4 border-0 rounded-0">
-          <h5 class="mb-0 fw-semibold">
-            <i class="bi bi-chat-square-text me-2"></i>
-            Album Reviews
-          </h5>
-          <%= link_to new_review_path, class: "btn btn-outline-light btn-sm border d-flex align-items-center" do %>
+         <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-3 px-4 border-0 rounded-0">
+            <h5 class="mb-0 fw-semibold">
+               <i class="bi bi-chat-square-text me-2"></i>
+               Album Reviews
+            </h5>
+            <%= link_to new_review_path, class: "btn btn-outline-light btn-sm border d-flex align-items-center" do %>
             <i class="bi bi-plus-circle me-2"></i> Add Review
-          <% end %>
-        </div>
-
-        <div class="card-body bg-white p-0">
-          <% if @reviews.any? %>
-            <div class="table-responsive"> <!-- adiciona responsividade e centralização -->
-              <table class="table table-hover align-middle mb-0 text-center rounded-0 border-0">
-                <thead class="bg-light text-dark border-bottom" style="border-color: #e0e0e0 !important;">
-                  <tr>
-                    <th class="py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem;">Review Title</th>
-                    <th class="py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem;">Content Preview</th>
-                    <th class="py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem;">Reviewer</th>
-                    <th class="py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem;">Album</th>
-                    <th class="py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem;">Rating</th>
-                    <th class="py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem;">Actions</th>
-                  </tr>
-                </thead>
-
-                <tbody class="bg-white">
-                  <% @reviews.each do |review| %>
-                    <tr class="border-bottom" style="border-color: #f0f0f0 !important;">
-                      
-                      <td class="py-3 border-0 fw-medium text-dark">
-                        <%= review.title %>
-                      </td>
-
-                      <td class="py-3 border-0 text-muted">
-                        <div class="text-truncate mx-auto" style="max-width: 250px; font-size: 0.9rem;">
-                          <%= review.content %>
-                        </div>
-                      </td>
-
-                      <td class="py-3 border-0 text-muted">
-                        <%= review.user.name %>
-                      </td>
-
-                      <td class="py-3 border-0 text-center">
-                        <% if review.album %>
-                          <span class="badge bg-light text-dark border m-1 px-2 py-1">
-                            <%= review.album.title %>
-                          </span>
-                        <% else %>
-                          <span class="text-muted" style="font-size: 0.85rem;">—</span>
-                        <% end %>
-                      </td>
-
-                      <td class="py-3 border-0">
-                        <div class="d-flex justify-content-center align-items-center">
-                          <i class="bi bi-star-fill text-warning me-1" style="font-size: 0.8rem;"></i>
-                          <span class="fw-medium text-dark" style="font-size: 0.9rem;">
-                            <%= review.score %>/10
-                          </span>
-                        </div>
-                      </td>
-
-                      <td class="py-3 border-0">
-                        <div class="d-flex justify-content-center gap-1">
-                          <%= link_to review_path(review), class: "btn btn-sm border-0 rounded-0", title: "View review" do %>
-                            <i class="bi bi-eye" style="color: #666;"></i>
-                          <% end %>
-
-                          <%= link_to edit_review_path(review), class: "btn btn-sm border-0 rounded-0", title: "Edit review" do %>
-                            <i class="bi bi-pencil" style="color: #666;"></i>
-                          <% end %>
-
-                          <button type="button" class="btn btn-sm border-0 rounded-0"
-                                  data-bs-toggle="modal" data-bs-target="#deleteReviewModal<%= review.id %>"
-                                  title="Delete review">
-                            <i class="bi bi-trash" style="color: #666;"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
+            <% end %>
+         </div>
+         <div class="card-body bg-white p-0">
+            <div class="mb-4">
+               <%= form_with url: reviews_path, method: :get, local: true, class: "row g-2 align-items-end" do |form| %>
+               <div class="col-md-4">
+                  <%= form.label :band_id, "Filter by Band", class: "form-label" %>
+                  <%= form.collection_select :band_id, @bands, :id, :name,
+                     { prompt: "Select a band", selected: params[:band_id] },
+                     { class: "form-select choice-band" } %>
+               </div>
+               <div class="col-md-2">
+                  <%= form.submit "Filter", class: "btn btn-dark w-100" %>
+               </div>
+               <% end %>
             </div>
-
+            <% if @reviews.any? %>
+            <div class="table-responsive">
+               <table class="table table-hover align-middle mb-0 text-center rounded-0 border-0">
+                  <thead class="bg-light text-dark border-bottom" style="border-color: #e0e0e0 !important;">
+                     <tr>
+                        <th class="py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem;">Review Title</th>
+                        <th class="py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem;">Content Preview</th>
+                        <th class="py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem;">Reviewer</th>
+                        <th class="py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem;">Band</th>
+                        <th class="py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem;">Album</th>
+                        <th class="py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem;">Rating</th>
+                        <th class="py-3 fw-semibold border-0 text-uppercase" style="font-size: 0.85rem;">Actions</th>
+                     </tr>
+                  </thead>
+                  <tbody class="bg-white">
+                     <% @reviews.each do |review| %>
+                     <tr class="border-bottom" style="border-color: #f0f0f0 !important;">
+                        <td class="py-3 border-0 fw-medium text-dark"><%= review.title %></td>
+                        <td class="py-3 border-0 text-muted">
+                           <div class="text-truncate mx-auto" style="max-width: 250px; font-size: 0.9rem;">
+                              <%= review.content %>
+                           </div>
+                        </td>
+                        <td class="py-3 border-0 text-muted"><%= review.user.name %></td>
+                        <td class="py-3 border-0 text-center">
+                           <% if review.album && review.album.bands.any? %>
+                           <span class="badge bg-light text-dark border m-1 px-2 py-1">
+                           <%= review.album.bands.map(&:name).join(", ") %>
+                           </span>
+                           <% else %>
+                           <span class="text-muted" style="font-size: 0.85rem;">—</span>
+                           <% end %>
+                        </td>
+                        <td class="py-3 border-0 text-center">
+                           <% if review.album %>
+                           <span class="badge bg-light text-dark border m-1 px-2 py-1"><%= review.album.title %></span>
+                           <% else %>
+                           <span class="text-muted" style="font-size: 0.85rem;">—</span>
+                           <% end %>
+                        </td>
+                        <td class="py-3 border-0">
+                           <div class="d-flex justify-content-center align-items-center">
+                              <i class="bi bi-star-fill text-warning me-1" style="font-size: 0.8rem;"></i>
+                              <span class="fw-medium text-dark" style="font-size: 0.9rem;"><%= review.score %>/10</span>
+                           </div>
+                        </td>
+                        <td class="py-3 border-0">
+                           <div class="d-flex justify-content-center gap-1">
+                              <%= link_to review_path(review), class: "btn btn-sm border-0 rounded-0", title: "View review" do %>
+                              <i class="bi bi-eye" style="color: #666;"></i>
+                              <% end %>
+                              <%= link_to edit_review_path(review), class: "btn btn-sm border-0 rounded-0", title: "Edit review" do %>
+                              <i class="bi bi-pencil" style="color: #666;"></i>
+                              <% end %>
+                              <button type="button" class="btn btn-sm border-0 rounded-0"
+                                 data-bs-toggle="modal" data-bs-target="#deleteReviewModal<%= review.id %>"
+                                 title="Delete review">
+                              <i class="bi bi-trash" style="color: #666;"></i>
+                              </button>
+                           </div>
+                        </td>
+                     </tr>
+                     <% end %>
+                  </tbody>
+               </table>
+            </div>
             <div class="d-flex justify-content-center py-3 border-top" style="border-color: #e0e0e0 !important;">
-              <%= paginate @reviews %>
+               <%= paginate @reviews %>
             </div>
-
-          <% else %>
+            <% else %>
             <div class="text-center py-5">
-              <i class="bi bi-chat-square-text display-4 mb-3" style="color: #ccc;"></i>
-              <p class="text-muted mb-2 fs-5">No reviews found</p>
-              <p class="text-muted small mb-4">Share your thoughts about albums</p>
-              <%= link_to new_review_path, class: "btn btn-dark rounded-0 border-0 px-4" do %>
-                <i class="bi bi-plus-circle me-2"></i>Write First Review
-              <% end %>
+               <i class="bi bi-chat-square-text display-4 mb-3" style="color: #ccc;"></i>
+               <p class="text-muted mb-2 fs-5">No reviews found</p>
+               <p class="text-muted small mb-4">Share your thoughts about albums</p>
+               <%= link_to new_review_path, class: "btn btn-dark rounded-0 border-0 px-4" do %>
+               <i class="bi bi-plus-circle me-2"></i>Write First Review
+               <% end %>
             </div>
-          <% end %>
-        </div>
+            <% end %>
+         </div>
       </div>
-    </div>
-  </div>
+   </div>
+</div>
 </div>

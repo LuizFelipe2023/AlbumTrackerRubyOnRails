@@ -1,6 +1,57 @@
 <div class="container-md py-4">
   <div class="row d-flex justify-content-center">
     <div class="col-md-12">
+      <!-- Card de Filtros -->
+      <div class="card border-0 rounded-0 mb-4" style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <div class="card-header bg-dark text-white py-3">
+          <h5 class="mb-0 fw-semibold">
+            <i class="bi bi-filter me-2"></i>
+            Filters
+          </h5>
+        </div>
+        <div class="card-body">
+          <%= form_with url: albums_path, method: :get, local: true, class: "row g-3 align-items-end" do |form| %>
+            <!-- Filtro por Banda -->
+            <div class="col-md-3">
+              <%= form.label :band_id, "Band", class: "form-label fw-semibold small text-uppercase", style: "letter-spacing: 0.5px;" %>
+              <%= form.select :band_id, 
+                  options_for_select([['All Bands', '']] + @bands.map { |b| [b.name, b.id] }, params[:band_id]),
+                  {}, 
+                  class: "form-select rounded-0 border" %>
+            </div>
+
+            <!-- Filtro por Gênero -->
+            <div class="col-md-3">
+              <%= form.label :genre_id, "Genre", class: "form-label fw-semibold small text-uppercase", style: "letter-spacing: 0.5px;" %>
+              <%= form.select :genre_id, 
+                  options_for_select([['All Genres', '']] + @genres.map { |g| [g.name, g.id] }, params[:genre_id]),
+                  {}, 
+                  class: "form-select rounded-0 border" %>
+            </div>
+
+            <!-- Filtro por Estilos -->
+            <div class="col-md-3">
+              <%= form.label :style_ids, "Styles", class: "form-label fw-semibold small text-uppercase", style: "letter-spacing: 0.5px;" %>
+              <%= form.select :style_ids, 
+                  options_for_select(@styles.map { |s| [s.name, s.id] }, selected: params[:style_ids]),
+                  { include_blank: 'All Styles' }, 
+                  multiple: true,
+                  class: "form-select rounded-0 border",
+                  size: 3 %>
+            </div>
+
+            <!-- Botões -->
+            <div class="col-md-3">
+              <div class="d-flex gap-2">
+                <%= form.submit "Apply Filters", class: "btn btn-dark rounded-0 border-0 flex-fill" %>
+                <%= link_to "Clear", albums_path, class: "btn btn-outline-secondary rounded-0 border flex-fill" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Card Principal dos Álbuns -->
       <div class="card border-0 rounded-0" style="box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
         <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-3 px-4 border-0 rounded-0">
           <h5 class="mb-0 fw-semibold">

@@ -2,18 +2,27 @@ class ReviewsController < ApplicationController
   before_action :set_review, only: %i[show edit update destroy]
 
   def index
+    @bands = Band.order(:name)
     @reviews = Review.includes(:album, :user)
-                     .joins(:album)
-                     .order('albums.title ASC, reviews.title ASC').page(params[:page]).per(10)
+                    .joins(:album)
+                    .order('albums.title ASC, reviews.title ASC')
+
+    if params[:band_id].present?
+      @reviews = @reviews.joins(album: :bands)
+                        .where(bands: { id: params[:band_id] })
+    end
+
+    @reviews = @reviews.page(params[:page]).per(10)
   end
 
   def show
   end
 
   def album_reviews
-    @album = Album.find(params[:album_id])
-    @reviews = @album.reviews.includes(:user).order(created_at: :desc)
+    @album = Album.includes(:bands, reviews: :user).find(params[:album_id])
+    @reviews = @album.reviews.order(created_at: :desc)
   end
+
 
   def new
     @review = Review.new
