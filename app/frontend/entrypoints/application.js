@@ -104,6 +104,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  const selectAlbum = document.querySelector(".choice-album");
+  if (selectAlbum) { 
+    new Choices(selectAlbum, {
+      searchEnabled: true,
+      shouldSort: false,
+      itemSelectText: ""
+    });
+  }
+
   initFavorites()
   initializeUserForm()
   initializeStyleForm()
